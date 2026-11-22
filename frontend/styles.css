@@ -1535,6 +1535,7 @@ button {
   color: var(--accent-ink);
   font-size: 0.92rem;
   line-height: 1.7;
+  white-space: pre-line;
 }
 
 .worker-followups {
