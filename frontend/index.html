@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="明白办事：把政策文件翻译成一张能照着办的清单。面向社区工作者、老年人和新市民的 AI 政策助手。">
+  <meta name="theme-color" content="#F2F0E9">
+  <title>明白办事 · 把政策翻译成能照着办的清单</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23B5432C'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='30' fill='%23F2F0E9' font-family='serif'%3E明%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">跳到工作台</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="paper-grid" aria-hidden="true"></div>
+
+  <header class="site-head">
+    <nav class="nav-shell" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="明白办事首页">
+        <span class="brand-mark" aria-hidden="true">明</span>
+        <span class="brand-text">明白办事<small>MINGBAI</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#why">为什么</a>
+        <a href="#how">怎么用</a>
+        <a href="#workspace">工作台</a>
+        <a href="#case">案例</a>
+      </div>
+      <a class="btn btn-primary nav-cta" href="#workspace">
+        生成明白卡
+        <span class="btn-icon" aria-hidden="true">↗</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav aria-label="移动端导航">
+      <a href="#why" style="--i:1">为什么</a>
+      <a href="#how" style="--i:2">怎么用</a>
+      <a href="#workspace" style="--i:3">工作台</a>
+      <a href="#case" style="--i:4">案例</a>
+    </nav>
+    <p class="mobile-menu-foot">示例政策仅用于演示，具体以当地官方发布为准。</p>
+  </div>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">社区政策 · AI 办事助手</p>
+        <h1 id="hero-title">
+          <span>把政策文件，翻译成</span>
+          <span><em>能照着办</em>的清单。</span>
+        </h1>
+        <p class="lede">
+          给社区工作者、老年人和新市民用的政策翻译工具。上传一份政策，几分钟生成一张明白卡：谁能办、要带什么、怎么办、什么时候截止，都有原文出处。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#workspace">
+            生成第一张明白卡
+            <span class="btn-icon" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn-ghost" href="#why">看看解决什么问题</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="stack-card"></div>
+        <article class="hero-card">
+          <div class="hero-card-top">
+            <span>明白卡</span>
+            <span>高龄津贴</span>
+          </div>
+          <h3>80 岁老人，<br>每月能领多少？</h3>
+          <div class="hero-card-row">
+            <span>谁能办</span>
+            <strong>本地户籍 · 年满 80 周岁</strong>
+          </div>
+          <div class="hero-card-row">
+            <span>带什么</span>
+            <strong>身份证 · 户口簿 · 银行卡</strong>
+          </div>
+          <div class="hero-card-row">
+            <span>怎么办</span>
+            <strong>社区申请 · 可预约上门</strong>
+          </div>
+          <div class="seal">明白</div>
+          <div class="hero-card-foot">
+            <span>来源 1 · 高龄津贴指南</span>
+            <span>[1]</span>
+          </div>
+        </article>
+        <div class="floating-note note-a"><span></span>一句话看懂</div>
+        <div class="floating-note note-b">材料清单 5 项</div>
+      </div>
+    </section>
+
+    <section class="proof-strip reveal" aria-label="演示数据">
+      <div><strong id="stat-docs">4</strong><span>份示例政策</span></div>
+      <div><strong id="stat-chunks">0</strong><span>个可追溯片段</span></div>
+      <div><strong id="stat-queries">0</strong><span>次问答记录</span></div>
+      <div><strong id="stat-saved">0</strong><span>预计节省分钟</span></div>
+    </section>
+
+    <section id="why" class="section why" aria-labelledby="why-title">
+      <header class="section-head reveal">
+        <h2 id="why-title">政策不是不存在，<br>是看不懂、跑不完、答不过来。</h2>
+      </header>
+      <div class="problem-grid">
+        <article class="problem-card paper-card reveal">
+          <div class="card-inner">
+            <p class="problem-label">看不懂</p>
+            <h3>一份政策三千字，关键条件藏在附件和术语里。</h3>
+            <p>老人看两行就放弃了，年轻人也要反复搜索。信息不是没有，是没有被翻译成能行动的话。</p>
+            <div class="doc-demo" aria-hidden="true">
+              <span class="doc-line long"></span>
+              <span class="doc-line"></span>
+              <span class="doc-line hl">年满 80 周岁，具有本地户籍</span>
+              <span class="doc-line"></span>
+              <span class="doc-line short"></span>
+              <span class="doc-line hl">每月 100 元，按月发放</span>
+            </div>
+          </div>
+        </article>
+        <article class="problem-card paper-card reveal">
+          <div class="card-inner">
+            <p class="problem-label">跑不完</p>
+            <h3>少带一样材料，就要再跑一趟。</h3>
+            <p>身份证、户口簿、银行卡、委托书。材料清单散落在不同段落，没人替居民先核对一遍。</p>
+            <ul class="mini-check" aria-hidden="true">
+              <li class="done">身份证</li>
+              <li class="done">户口簿</li>
+              <li>银行卡</li>
+              <li>委托书</li>
+            </ul>
+          </div>
+        </article>
+        <article class="problem-card paper-card reveal">
+          <div class="card-inner">
+            <p class="problem-label">答不过来</p>
+            <h3>同一个问题，窗口每天要回答几十遍。</h3>
+            <p>新人上手靠问同事，居民得到的回答还不一致。经验留在个人脑子里，没有变成可复用的能力。</p>
+            <div class="chat-demo" aria-hidden="true">
+              <span>“外地户口能办吗？”</span>
+              <span>“要带几张复印件？”</span>
+              <span>“多久能到账？”</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="how" class="section how" aria-labelledby="how-title">
+      <header class="section-head reveal">
+        <h2 id="how-title">把一份政策，<br>变成一张能照着办的卡。</h2>
+      </header>
+      <ol class="how-steps">
+        <li class="reveal">
+          <span class="step-index">第一步</span>
+          <h3>上传政策</h3>
+          <p>支持 txt / md。也可以直接用内置示例政策体验，不需要准备数据。</p>
+        </li>
+        <li class="reveal">
+          <span class="step-index">第二步</span>
+          <h3>生成明白卡</h3>
+          <p>自动拆出谁能办、能领什么、要带什么、怎么办、什么时候截止、常见坑。</p>
+        </li>
+        <li class="reveal">
+          <span class="step-index">第三步</span>
+          <h3>照着办或转述</h3>
+          <p>居民版直接看，工作者版一键复制回复。材料清单可以勾选、导出、打印。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="workspace" class="section workspace" aria-labelledby="workspace-title">
+      <header class="section-head reveal">
+        <p class="eyebrow">可以现在就试</p>
+        <h2 id="workspace-title">生成一张明白卡。</h2>
+        <p class="section-lede">选一份示例政策，或上传你手边的政策文件。所有回答只基于当前政策，并标注出处。</p>
+      </header>
+
+      <div class="workbench paper-card reveal" id="workbench" data-persona="resident">
+        <div class="card-inner">
+          <div class="workbench-top">
+            <div class="policy-picker">
+              <label for="policy-select">当前政策</label>
+              <select id="policy-select" aria-label="选择政策文件"></select>
+            </div>
+            <div class="mode-switch" role="group" aria-label="回答视角">
+              <button type="button" data-persona="resident" class="is-active">居民版</button>
+              <button type="button" data-persona="worker">工作者版</button>
+            </div>
+            <div class="a11y-controls">
+              <button type="button" id="large-text-toggle" aria-pressed="false">大字</button>
+              <button type="button" id="speak-toggle" aria-pressed="false">朗读</button>
+            </div>
+          </div>
+
+          <div class="workbench-body">
+            <section class="card-panel" aria-labelledby="card-title">
+              <div class="card-panel-head">
+                <div>
+                  <p class="kicker">明白卡</p>
+                  <h3 id="card-title">正在读取政策…</h3>
+                </div>
+                <div class="card-actions">
+                  <button type="button" id="export-btn" class="text-btn">导出清单</button>
+                  <button type="button" id="print-btn" class="text-btn">打印</button>
+                </div>
+              </div>
+
+              <div id="card-loading" class="card-loading" hidden>
+                <span class="skeleton wide"></span>
+                <span class="skeleton"></span>
+                <span class="skeleton short"></span>
+              </div>
+
+              <div id="card-content">
+                <p class="one-liner" id="one-liner"></p>
+
+                <div class="card-grid">
+                  <div class="mini-card">
+                    <h4>谁能办</h4>
+                    <ul id="audience-list"></ul>
+                  </div>
+                  <div class="mini-card">
+                    <h4>能领什么</h4>
+                    <ul id="benefit-list"></ul>
+                  </div>
+                </div>
+
+                <div class="timeline-block">
+                  <div class="block-head">
+                    <h4>怎么办</h4>
+                    <span id="steps-count" class="count-tag"></span>
+                  </div>
+                  <ol id="steps-list" class="step-list"></ol>
+                </div>
+
+                <div class="checklist-block">
+                  <div class="block-head">
+                    <h4>要带什么</h4>
+                    <span id="checklist-progress" class="count-tag">0 / 0</span>
+                  </div>
+                  <ul id="materials-list" class="materials"></ul>
+                </div>
+
+                <div class="card-grid two">
+                  <div class="mini-card">
+                    <h4>什么时候截止</h4>
+                    <ul id="deadline-list"></ul>
+                  </div>
+                  <div class="mini-card accent-card">
+                    <h4>常见坑</h4>
+                    <ul id="pitfalls-list"></ul>
+                  </div>
+                </div>
+
+                <div class="worker-kit" id="worker-kit" hidden>
+                  <div class="block-head">
+                    <h4>可直接转述给居民</h4>
+                    <button type="button" id="copy-reply-btn" class="text-btn">复制回复</button>
+                  </div>
+                  <p id="worker-reply"></p>
+                  <div class="worker-followups">
+                    <span>高频追问</span>
+                    <button type="button" data-followup="需要准备哪些材料？">材料</button>
+                    <button type="button" data-followup="多久能办完？">时限</button>
+                    <button type="button" data-followup="有哪些容易忽略的注意事项？">注意事项</button>
+                  </div>
+                </div>
+
+                <div class="source-block">
+                  <div class="block-head">
+                    <h4>原文出处</h4>
+                    <span id="source-count" class="count-tag"></span>
+                  </div>
+                  <div id="sources-list"></div>
+                </div>
+
+                <p class="disclaimer" id="disclaimer"></p>
+              </div>
+            </section>
+
+            <aside class="chat-panel" aria-labelledby="chat-title">
+              <div class="chat-head">
+                <div>
+                  <p class="kicker">问明白</p>
+                  <h3 id="chat-title">还有哪里不清楚？</h3>
+                </div>
+                <span id="mode-badge" class="badge">本地模式</span>
+              </div>
+              <div id="chat-log" class="chat-log" role="log" aria-live="polite">
+                <div class="welcome-note">
+                  <strong>只回答这份政策里的内容。</strong>
+                  拿不准的地方，会直接告诉你，并建议去社区窗口或拨打 12345 确认。
+                </div>
+              </div>
+              <div id="suggestions" class="suggestions" aria-label="推荐问题"></div>
+              <form id="chat-form" class="composer">
+                <label class="sr-only" for="question">输入问题</label>
+                <textarea id="question" rows="2" placeholder="例如：我是外地户口，能办吗？" autocomplete="off"></textarea>
+                <button type="submit" id="send-btn" class="send-btn" aria-label="发送问题">↑</button>
+              </form>
+              <p class="composer-hint">Enter 发送，Shift + Enter 换行。回答只基于当前政策。</p>
+            </aside>
+          </div>
+
+          <div class="upload-bar">
+            <label class="upload-label" for="file-input">
+              <span aria-hidden="true">＋</span>
+              上传新政策（txt / md）
+            </label>
+            <input id="file-input" type="file" accept=".txt,.md,.markdown" multiple>
+            <button type="button" id="delete-policy" class="delete-btn">删除当前政策</button>
+            <span id="upload-status" class="upload-status" role="status"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="case" class="section case" aria-labelledby="case-title">
+      <div class="case-inner paper-card reveal">
+        <div class="card-inner">
+          <div class="case-copy">
+            <h2 id="case-title">把一次性的「帮个忙」，<br>变成可复用的「办事能力」。</h2>
+            <p>
+              社区工作者最缺的不是热情，是时间。明白办事把政策整理、材料核对、重复答疑这三件事，压缩成一张可复用的卡。新人照着卡就能答，居民照着卡就能办。
+            </p>
+            <a class="btn btn-primary" href="/static/case-study/index.html">
+              查看一页纸案例
+              <span class="btn-icon" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="case-metrics" aria-label="演示数据">
+            <div><strong>30<span>分钟</span></strong><small>人工整理一份政策</small></div>
+            <div class="metric-arrow" aria-hidden="true">→</div>
+            <div><strong>5<span>分钟</span></strong><small>生成一张明白卡</small></div>
+            <p>按示例政策演示估算，实际以使用场景为准。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div>
+      <span class="brand-mark small" aria-hidden="true">明</span>
+      <span>明白办事 · 面向社区场景的 AI 应用案例</span>
+    </div>
+    <p>示例政策仅用于演示，具体条件、金额和时限以当地官方最新发布为准。</p>
+  </footer>
+
+  <noscript>
+    <div class="noscript">这个工作台需要 JavaScript 才能生成明白卡。请开启 JavaScript 后刷新页面。</div>
+  </noscript>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

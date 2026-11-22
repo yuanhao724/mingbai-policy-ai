@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>明白办事 · AI 应用案例</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+
+    :root {
+      --paper: #f2f0e9;
+      --card: #fbfaf5;
+      --card-warm: #f7f4eb;
+      --ink: #17211b;
+      --ink-2: #39433c;
+      --muted: #5e665d;
+      --line: rgba(23, 33, 27, 0.13);
+      --line-strong: rgba(23, 33, 27, 0.22);
+      --accent: #b5432c;
+      --accent-deep: #8f3120;
+      --accent-soft: #f2dcd3;
+      --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, serif;
+      --sans: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      --ui: "Bahnschrift", "Noto Sans SC", "Segoe UI Variable Display", sans-serif;
+      --mono: "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      color-scheme: light;
+    }
+
+    body {
+      margin: 0;
+      background: #e8e4d9;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 8pt;
+      line-height: 1.48;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .sheet {
+      width: 190mm;
+      min-height: 277mm;
+      margin: 8mm auto;
+      padding: 7.5mm 9mm 6mm;
+      background:
+        radial-gradient(120mm 70mm at 100% 0%, rgba(181, 67, 44, 0.07), transparent 65%),
+        var(--card);
+      box-shadow: 0 30mm 60mm -40mm rgba(23, 33, 27, 0.5);
+    }
+
+    .head {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 7mm;
+      align-items: end;
+      padding-bottom: 3mm;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .label {
+      margin: 0 0 1.5mm;
+      color: var(--accent);
+      font-family: var(--ui);
+      font-size: 6.6pt;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 23pt;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .sub {
+      margin: 2mm 0 0;
+      color: var(--ink-2);
+      font-family: var(--serif);
+      font-size: 9.8pt;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4mm;
+      justify-content: flex-end;
+      align-content: end;
+    }
+
+    .meta span,
+    .stack span {
+      padding: 1mm 2mm;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+      color: var(--ink-2);
+      font-family: var(--ui);
+      font-size: 6.5pt;
+      line-height: 1.1;
+    }
+
+    .lead {
+      margin: 3mm 0;
+      padding: 2.4mm 3mm;
+      border-left: 2px solid var(--accent);
+      border-radius: 0 2mm 2mm 0;
+      background: linear-gradient(90deg, var(--accent-soft), transparent 88%);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 8.7pt;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 5.5mm;
+    }
+
+    section {
+      margin-bottom: 2.6mm;
+      break-inside: avoid;
+    }
+
+    h2 {
+      display: flex;
+      gap: 2mm;
+      align-items: baseline;
+      margin: 0 0 1.3mm;
+      padding-bottom: 0.8mm;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--serif);
+      font-size: 9.6pt;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h2 span {
+      color: var(--accent);
+      font-family: var(--ui);
+      font-size: 6.2pt;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 1mm 0;
+    }
+
+    strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    ul,
+    ol {
+      margin: 0.9mm 0;
+      padding-left: 4mm;
+    }
+
+    li {
+      margin-bottom: 0.7mm;
+    }
+
+    .tight li {
+      margin-bottom: 0.7mm;
+    }
+
+    .features li::marker,
+    .tight li::marker,
+    .workflow li::marker {
+      color: var(--accent);
+    }
+
+    .flow {
+      margin-top: 2mm;
+      padding: 1.6mm 2mm;
+      border: 1px dashed var(--line-strong);
+      border-radius: 2mm;
+      background: var(--card-warm);
+      color: var(--ink-2);
+      font-family: var(--ui);
+      font-size: 7pt;
+      letter-spacing: 0.02em;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4mm;
+      margin: 1.5mm 0;
+    }
+
+    .metrics div {
+      padding: 1.5mm 2mm;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: var(--card-warm);
+    }
+
+    .metrics strong {
+      display: block;
+      font-family: var(--ui);
+      font-size: 12pt;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .metrics span {
+      display: block;
+      margin-top: 0.8mm;
+      color: var(--muted);
+      font-size: 6.6pt;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 6.5pt;
+      line-height: 1.42;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1mm;
+      margin: 1.2mm 0 1.5mm;
+    }
+
+    .workflow {
+      padding-left: 4mm;
+    }
+
+    .workflow li {
+      margin-bottom: 0.7mm;
+    }
+
+    pre {
+      margin: 1.2mm 0;
+      padding: 1.8mm 2.2mm;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: var(--card-warm);
+      color: var(--ink-2);
+      font-family: var(--mono);
+      font-size: 6.1pt;
+      line-height: 1.4;
+      white-space: pre-wrap;
+    }
+
+    .limits p {
+      color: var(--ink-2);
+      font-size: 6.8pt;
+    }
+
+    footer {
+      margin-top: 1.5mm;
+      padding-top: 1.5mm;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 6.3pt;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+    }
+
+    .toolbar button {
+      padding: 8px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 760px) {
+      .sheet {
+        width: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .head,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta {
+        justify-content: flex-start;
+      }
+
+      .toolbar {
+        position: static;
+        padding: 10px;
+        text-align: right;
+      }
+    }
+
+    @media screen {
+      body {
+        font-size: 9pt;
+        line-height: 1.55;
+      }
+
+      .sheet {
+        padding: 11mm 11mm 9mm;
+      }
+
+      h1 {
+        font-size: 27pt;
+      }
+
+      .sub {
+        font-size: 10.5pt;
+      }
+
+      .lead {
+        font-size: 10pt;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .toolbar {
+        display: none;
+      }
+
+      .sheet {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar"><button type="button" onclick="window.print()">打印 / 导出 PDF</button></div>
+
+  <main class="sheet">
+    <header class="head">
+      <div>
+        <p class="label">AI 应用案例 · 社区政策场景</p>
+        <h1>明白办事</h1>
+        <p class="sub">把政策文件，翻译成一张能照着办的清单。</p>
+      </div>
+      <div class="meta">
+        <span>Python</span><span>FastAPI</span><span>SQLite</span><span>scikit-learn</span><span>SSE</span><span>Vibe Coding</span>
+      </div>
+    </header>
+
+    <div class="lead">
+      面向社区工作者、老年人和新市民。上传政策，几分钟生成一张明白卡：谁能办、能领什么、要带什么、怎么办、什么时候截止、常见坑，每条结论都能回到原文。
+    </div>
+
+    <div class="grid">
+      <div>
+        <section>
+          <h2><span>a</span> 做了什么</h2>
+          <p><strong>问题：</strong>政策不是没有，是看不懂、跑不完、答不过来。条件藏在术语里，材料清单分散，同一个问题窗口每天要答几十遍。</p>
+          <ul class="features">
+            <li><strong>政策翻译：</strong>自动拆出谁能办、待遇标准、所需材料、办理流程、时限和注意事项。</li>
+            <li><strong>原文可追溯：</strong>问答锁定当前政策，每条结论带 [n] 引用，展开即可核对原文。</li>
+            <li><strong>两种视角：</strong>居民版用大白话；工作者版生成可直接转述的回复。</li>
+            <li><strong>能落地：</strong>材料清单可勾选、导出 Markdown、打印；支持大字和浏览器朗读。</li>
+          </ul>
+          <div class="flow">选政策 / 上传 → 生成明白卡 → 勾选材料 / 提问 → 导出或转述</div>
+        </section>
+
+        <section>
+          <h2><span>c</span> 结果怎么样</h2>
+          <div class="metrics">
+            <div><strong>4</strong><span>份示例政策</span></div>
+            <div><strong>12</strong><span>个可追溯片段</span></div>
+            <div><strong>0.6-0.8s</strong><span>本地问答响应</span></div>
+            <div><strong>128</strong><span>预计节省分钟</span></div>
+          </div>
+          <p class="note">按「人工 30 分钟 / 政策、助手 5 分钟」和「人工 6 分钟 / 问答、助手 0.5 分钟」估算。测试环境无外网，使用本地 TF-IDF 兜底；实际效果需社区试点验证。</p>
+          <ul class="tight">
+            <li>4 份政策均能抽出 3-7 项材料、3-6 步流程，0 控制台报错。</li>
+            <li>桌面与手机均无横向溢出；上传后 1 秒内完成切块、入库和生成。</li>
+          </ul>
+        </section>
+      </div>
+
+      <div>
+        <section>
+          <h2><span>b</span> 用了什么工具</h2>
+          <div class="stack">
+            <span>Python 3.13</span><span>FastAPI</span><span>SQLite</span><span>scikit-learn TF-IDF</span><span>原生 HTML/CSS/JS</span><span>SSE</span><span>ChatGPT / Claude Code 式 AI 编程</span>
+          </div>
+          <ol class="workflow">
+            <li><strong>拆需求：</strong>用 AI 把 JD 和痛点拆成 6 个可验证任务：政策卡、引用、问答、上传、导出、适老化。</li>
+            <li><strong>生成骨架：</strong>让 AI 生成 FastAPI 分层、SQLite schema、SSE 路由和前端结构。</li>
+            <li><strong>审查与调试：</strong>检查检索范围、引用映射、中文零命中、SSE 断流，再逐项验证。</li>
+            <li><strong>沉淀：</strong>把有效提示词、踩坑和测试记录写进文档。</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2><span>提示词</span> 结构化抽取</h2>
+          <pre>角色：你是政策翻译助手。
+目标：把政策片段改写成居民能照着办的清单。
+约束：只依据片段；每条结论标注 [n]；
+涉及金额、年龄、时限时提醒以官方为准。
+输出：谁能办 / 要带什么 / 怎么办 / 何时截止 / 常见坑。</pre>
+        </section>
+
+        <section>
+          <h2><span>技术</span> 面试可讲的点</h2>
+          <ul class="tight">
+            <li>中文检索用字符 n-gram TF-IDF，离线可跑；零命中回退当前政策全文。</li>
+            <li>问答锁定 doc_id，片段按原文顺序编号，引用和来源一一对应。</li>
+            <li>SSE 流式输出，模型不可用时自动回退本地检索。</li>
+          </ul>
+        </section>
+
+        <section class="limits">
+          <h2><span>下一步</span> 现实边界</h2>
+          <p>示例政策仅用于演示，必须接入官方政策库并加人工审核。下一步补 PDF 解析、语音输入、多政策对比，以及社区试点指标：材料漏带率、窗口重复咨询量、居民完成率。</p>
+        </section>
+      </div>
+    </div>
+
+    <footer>明白办事 · AI 应用开发案例 · 示例政策仅用于产品演示，具体以当地官方最新发布为准。</footer>
+  </main>
+</body>
+</html>
