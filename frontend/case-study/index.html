@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>明白办事 · AI 应用案例</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23B5432C'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='30' fill='%23F2F0E9' font-family='serif'%3E明%3C/text%3E%3C/svg%3E">
   <style>
     @page {
       size: A4;
@@ -41,8 +42,8 @@
       background: #e8e4d9;
       color: var(--ink);
       font-family: var(--sans);
-      font-size: 8pt;
-      line-height: 1.48;
+      font-size: 10pt;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -78,7 +79,7 @@
     h1 {
       margin: 0;
       font-family: var(--serif);
-      font-size: 23pt;
+      font-size: 25pt;
       font-weight: 600;
       line-height: 1.05;
       letter-spacing: -0.04em;
@@ -88,7 +89,7 @@
       margin: 2mm 0 0;
       color: var(--ink-2);
       font-family: var(--serif);
-      font-size: 9.8pt;
+      font-size: 10.5pt;
       line-height: 1.35;
     }
 
@@ -120,8 +121,8 @@
       background: linear-gradient(90deg, var(--accent-soft), transparent 88%);
       color: var(--ink);
       font-family: var(--serif);
-      font-size: 8.7pt;
-      line-height: 1.45;
+      font-size: 9.5pt;
+      line-height: 1.5;
     }
 
     .grid {
@@ -230,8 +231,8 @@
 
     .note {
       color: var(--muted);
-      font-size: 6.5pt;
-      line-height: 1.42;
+      font-size: 7.2pt;
+      line-height: 1.48;
     }
 
     .stack {
@@ -257,14 +258,55 @@
       background: var(--card-warm);
       color: var(--ink-2);
       font-family: var(--mono);
-      font-size: 6.1pt;
-      line-height: 1.4;
+      font-size: 6.8pt;
+      line-height: 1.45;
       white-space: pre-wrap;
     }
 
     .limits p {
       color: var(--ink-2);
-      font-size: 6.8pt;
+      font-size: 7.4pt;
+    }
+
+    .engineering {
+      margin-top: 4.5mm;
+      padding-top: 3mm;
+      border-top: 1px solid var(--line-strong);
+      break-inside: avoid;
+    }
+
+    .engineering h2 {
+      margin-bottom: 2mm;
+    }
+
+    .engineering-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6mm;
+    }
+
+    .engineering-grid div {
+      padding: 2mm 2.2mm;
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      background: var(--card-warm);
+    }
+
+    .engineering-grid strong {
+      display: block;
+      font-family: var(--ui);
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .engineering-grid span {
+      display: block;
+      margin-top: 1mm;
+      color: var(--muted);
+      font-size: 6.9pt;
+      line-height: 1.4;
     }
 
     footer {
@@ -371,7 +413,7 @@
         <p class="sub">把政策文件，翻译成一张能照着办的清单。</p>
       </div>
       <div class="meta">
-        <span>Python</span><span>FastAPI</span><span>SQLite</span><span>scikit-learn</span><span>SSE</span><span>Vibe Coding</span>
+        <span>Python</span><span>FastAPI</span><span>SQLite</span><span>scikit-learn</span><span>SSE</span><span>Prometheus</span><span>Docker</span><span>Vibe Coding</span>
       </div>
     </header>
 
@@ -404,6 +446,7 @@
           <p class="note">按「人工 30 分钟 / 政策、助手 5 分钟」和「人工 6 分钟 / 问答、助手 0.5 分钟」估算。测试环境无外网，使用本地 TF-IDF 兜底；实际效果需社区试点验证。</p>
           <ul class="tight">
             <li>4 份政策均能抽出 3-7 项材料、3-6 步流程，0 控制台报错。</li>
+            <li>32 条离线评测：Hit@3 100%，引用有效 100%，拒答 100%，Top1 85.7%；26 个测试通过。</li>
             <li>桌面与手机均无横向溢出；上传后 1 秒内完成切块、入库和生成。</li>
           </ul>
         </section>
@@ -438,6 +481,7 @@
             <li>中文检索用字符 n-gram TF-IDF，离线可跑；零命中回退当前政策全文。</li>
             <li>问答锁定 doc_id，片段按原文顺序编号，引用和来源一一对应。</li>
             <li>SSE 流式输出，模型不可用时自动回退本地检索。</li>
+            <li>32 条 gold set + 质量门；AI 结果默认待审核，审核动作写审计日志。</li>
           </ul>
         </section>
 
@@ -447,6 +491,18 @@
         </section>
       </div>
     </div>
+
+    <section class="engineering">
+      <h2><span>工程</span> 生产化与治理</h2>
+      <div class="engineering-grid">
+        <div><strong>32</strong><span>离线评测问题<br>Hit@3 100%</span></div>
+        <div><strong>26</strong><span>自动化测试<br>0 硬失败</span></div>
+        <div><strong>100%</strong><span>引用有效 / 支撑<br>拒答准确</span></div>
+        <div><strong>待审核</strong><span>人工审核 + 审计日志<br>AI 不直接发布</span></div>
+        <div><strong>可观测</strong><span>Request ID / Prometheus<br>限流 / 安全头</span></div>
+        <div><strong>可部署</strong><span>Docker / GitHub Actions<br>测试 + 质量门</span></div>
+      </div>
+    </section>
 
     <footer>明白办事 · AI 应用开发案例 · 示例政策仅用于产品演示，具体以当地官方最新发布为准。</footer>
   </main>

@@ -22,13 +22,57 @@ _BULLET_PREFIX = re.compile(r"^\s*(?:(?:[-*•]|\d+[.、)]|[（(]\d+[）)]|[①-
 _HEADING_PREFIX = re.compile(r"^#{1,6}\s*")
 
 FIELD_HINTS = {
-    "materials": ("材料", "带什么", "准备", "证件", "证明", "毕业证", "复印件", "申请表"),
+    "materials": ("材料", "带什么", "准备", "证件", "证明", "毕业证", "复印件", "申请表", "银行卡", "凭证"),
+    "contact": ("电话", "咨询", "热线", "窗口", "找谁", "打哪个"),
+    "audience": ("哪些人", "哪些老人", "哪些家庭", "哪些人员", "谁能", "条件", "对象", "资格", "年龄", "户籍"),
+    "pitfalls": ("注意", "坑", "避免", "风险", "不能"),
     "steps": ("流程", "怎么办", "步骤", "办理", "申请"),
     "deadline": ("多久", "时限", "截止", "时间", "工作日", "有效期"),
-    "benefit": ("多少", "钱", "标准", "补贴", "报销", "金额", "待遇"),
-    "audience": ("谁能办", "条件", "对象", "资格", "外地", "年龄", "户籍"),
-    "pitfalls": ("注意", "坑", "避免", "风险", "不能"),
+    "benefit": ("多少", "金额", "标准", "比例", "待遇", "报销", "补贴"),
 }
+
+FIELD_HEADING_HINTS = {
+    "materials": ("所需材料", "材料"),
+    "contact": ("咨询方式", "咨询"),
+    "audience": ("适用对象", "对象", "条件"),
+    "pitfalls": ("注意事项", "注意"),
+    "steps": ("办理流程", "流程", "步骤", "办理方式", "申请方式"),
+    "deadline": ("办理时限", "时限", "截止", "期限", "有效期", "申报时间", "发放时间"),
+    "benefit": ("待遇与标准", "待遇", "标准", "补贴标准"),
+}
+
+STOPWORDS = (
+    "怎么样",
+    "怎么办",
+    "怎么",
+    "什么",
+    "哪些",
+    "多少",
+    "是否",
+    "可以",
+    "需要",
+    "如何",
+    "请问",
+    "吗",
+    "呢",
+    "的",
+    "我",
+    "你",
+    "他",
+    "她",
+    "它",
+    "这",
+    "那",
+    "有",
+    "要",
+    "能",
+    "会",
+)
+
+REFUSAL = (
+    "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；"
+    "建议换一个与当前政策相关的问题，或到社区窗口确认。"
+)
 
 
 def _candidate_sentences(text: str):
@@ -53,7 +97,7 @@ def _candidate_sentences(text: str):
             continue
         for part in _SENTENCE_SPLIT.split(line):
             part = part.strip()
-            if len(part) >= 8:
+            if len(part) >= 5:
                 yield part, heading, is_bullet
 
 
@@ -71,17 +115,28 @@ def _grams(text: str) -> set[str]:
 def _detect_field(question: str) -> str | None:
     if any(hint in question for hint in ("材料", "带什么", "准备", "证件", "复印件", "申请表")):
         return "materials"
-    if any(hint in question for hint in ("补贴", "报销", "多少", "金额", "标准", "比例", "待遇", "能领")):
-        return "benefit"
-    if any(hint in question for hint in ("流程", "怎么办", "步骤", "办理", "申请")):
-        return "steps"
-    if any(hint in question for hint in ("多久", "时限", "截止", "时间", "工作日", "有效期")):
-        return "deadline"
-    if any(hint in question for hint in ("条件", "对象", "资格", "外地", "年龄", "户籍", "谁能办")):
+    if any(hint in question for hint in ("电话", "咨询", "热线", "窗口", "找谁", "打哪个")):
+        return "contact"
+    if any(hint in question for hint in ("哪些人", "哪些老人", "哪些家庭", "哪些人员", "谁能", "条件", "对象", "资格", "年龄", "户籍")):
         return "audience"
     if any(hint in question for hint in ("注意", "坑", "避免", "风险")):
         return "pitfalls"
+    if "补贴" in question and any(hint in question for hint in ("多久", "领", "期限")):
+        return "benefit"
+    if any(hint in question for hint in ("流程", "怎么办", "怎么申请", "步骤", "办理", "申请")):
+        return "steps"
+    if any(hint in question for hint in ("多久", "时限", "截止", "时间", "工作日", "有效期")):
+        return "deadline"
+    if any(hint in question for hint in ("多少", "金额", "标准", "比例", "待遇", "报销", "补贴")):
+        return "benefit"
     return None
+
+
+def _content_grams(text: str) -> set[str]:
+    cleaned = text
+    for word in STOPWORDS:
+        cleaned = cleaned.replace(word, " ")
+    return _grams(cleaned)
 
 
 def local_extractive_answer(
@@ -95,8 +150,14 @@ def local_extractive_answer(
             "你可以换一种问法，或先在左侧上传相关文档后再试。"
         )
 
-    question_grams = _grams(question)
     target_field = _detect_field(question)
+    if target_field is None:
+        content = _content_grams(question)
+        corpus = set().union(*(_grams(context.text) for context in contexts))
+        if content and not (content & corpus):
+            return REFUSAL
+
+    question_grams = _grams(question)
     candidates: list[tuple[float, int, int, str, bool, bool]] = []
     for citation, context in enumerate(contexts, start=1):
         for sentence_index, (sentence, heading, is_bullet) in enumerate(_candidate_sentences(context.text)):
@@ -107,9 +168,8 @@ def local_extractive_answer(
             heading_match = False
             sentence_match = False
             if target_field:
-                hints = FIELD_HINTS[target_field]
-                heading_match = any(hint in heading for hint in hints)
-                sentence_match = any(hint in sentence for hint in hints)
+                heading_match = any(hint in heading for hint in FIELD_HEADING_HINTS[target_field])
+                sentence_match = any(hint in sentence for hint in FIELD_HINTS[target_field])
                 if heading_match:
                     score += 1.25
                 if sentence_match:
@@ -120,15 +180,18 @@ def local_extractive_answer(
         heading_pool = [candidate for candidate in candidates if candidate[4]]
         sentence_pool = [candidate for candidate in candidates if candidate[5]]
         if len(heading_pool) >= 2:
-            extra = [candidate for candidate in sentence_pool if not candidate[4]][:3]
-            candidates = heading_pool + extra
+            if target_field == "materials":
+                extra = [candidate for candidate in sentence_pool if not candidate[4]][:3]
+                candidates = heading_pool + extra
+            else:
+                candidates = heading_pool
         elif len(sentence_pool) >= 2:
             candidates = sentence_pool
 
     candidates.sort(key=lambda item: (-item[0], item[1], item[2]))
     picked: list[tuple[int, int, str]] = []
     seen_normalized: list[str] = []
-    limit = 8 if target_field == "materials" else 5
+    limit = 8 if target_field in {"materials", "steps"} else 5
     for _, citation, sentence_index, sentence, _, _ in candidates:
         normalized = re.sub(r"[\s，。；;、]", "", sentence)
         if any(normalized in existing or existing in normalized for existing in seen_normalized):
@@ -150,6 +213,7 @@ def local_extractive_answer(
             "benefit": "待遇标准如下：",
             "audience": "先看自己是否符合这些条件：",
             "pitfalls": "这几个地方容易踩坑：",
+            "contact": "可以这样咨询：",
         }.get(target_field, "用大白话说，这份政策主要看这几点：")
         outro = "如果拿不准，建议拨打 12345 或到社区窗口再确认一次。"
     lines = [intro, ""]
@@ -158,7 +222,8 @@ def local_extractive_answer(
         if not sentence.endswith(("。", "！", "？", ".", "!", "?")):
             sentence += "。"
         lines.append(f"- {sentence} [{citation}]")
-    lines.extend(["", f"{outro}（引用自 {len(contexts)} 个片段）"])
+    cited = sorted({citation for citation, _, _ in picked})
+    lines.extend(["", f"{outro}（引用自 {len(cited)} 个片段）"])
     return "\n".join(lines)
 
 

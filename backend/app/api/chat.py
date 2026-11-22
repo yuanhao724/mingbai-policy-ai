@@ -11,7 +11,7 @@ from .. import db
 from ..answer import build_messages, local_extractive_answer, stream_pieces
 from ..config import settings
 from ..llm import stream_chat
-from ..retrieval import Retrieved, cache, rows_from_db
+from ..qa import scoped_contexts
 from ..schemas import ChatRequest
 
 
@@ -32,26 +32,14 @@ async def chat_stream(payload: ChatRequest) -> StreamingResponse:
     document = db.get_document(settings.db_path, payload.doc_id)
     if not document:
         raise HTTPException(status_code=404, detail="当前政策不存在")
-    chunk_rows = rows_from_db(
-        [row for row in db.all_chunks(settings.db_path) if row["doc_id"] == payload.doc_id]
+    retrieved = scoped_contexts(
+        settings.db_path,
+        payload.doc_id,
+        question,
+        top_k=payload.top_k or settings.top_k,
     )
-    if not chunk_rows:
+    if not retrieved:
         raise HTTPException(status_code=422, detail="当前政策还没有可检索的文本片段")
-    top_k = payload.top_k or settings.top_k
-    hits = cache.search(chunk_rows, question, top_k)
-    score_by_chunk = {hit.chunk_id: hit.score for hit in hits}
-    ordered_rows = sorted(chunk_rows, key=lambda row: row.ord)[:12]
-    retrieved = [
-        Retrieved(
-            chunk_id=row.chunk_id,
-            doc_id=row.doc_id,
-            doc_title=row.doc_title,
-            ord=row.ord,
-            text=row.text,
-            score=score_by_chunk.get(row.chunk_id, 0.0),
-        )
-        for row in ordered_rows
-    ]
     sources = [item.to_source(index) for index, item in enumerate(retrieved, start=1)]
     history = [turn.model_dump() for turn in payload.history]
 
@@ -63,7 +51,7 @@ async def chat_stream(payload: ChatRequest) -> StreamingResponse:
                 "sources": sources,
                 "mode": mode,
                 "documents": 1,
-                "chunks": len(chunk_rows),
+                "chunks": len(retrieved),
             },
         )
         pieces: list[str] = []

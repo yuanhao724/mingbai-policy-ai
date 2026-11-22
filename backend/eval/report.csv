@@ -1,0 +1,33 @@
+﻿id,doc,question,intent,answerable,hit_at_3,keyword_recall,citation_validity,citation_support,groundedness,refusal_ok,latency_ms,failure_reason
+elder_materials,高龄老人津贴申领指南,申请高龄津贴要带哪些证件？,materials,True,1.0,1.0,1.0,1.0,1.0,,0.96,通过
+elder_deadline,高龄老人津贴申领指南,高龄津贴一般多久能办完？,deadline,True,1.0,1.0,1.0,1.0,1.0,,0.36,通过
+elder_benefit,高龄老人津贴申领指南,80 岁老人每月能领多少钱？,benefit,True,1.0,1.0,1.0,1.0,1.0,,0.35,通过
+elder_audience,高龄老人津贴申领指南,哪些老人可以申请高龄津贴？,audience,True,1.0,1.0,1.0,1.0,1.0,,0.36,通过
+elder_steps,高龄老人津贴申领指南,高龄津贴的办理流程是什么？,steps,True,1.0,1.0,1.0,1.0,1.0,,0.36,通过
+elder_pitfalls,高龄老人津贴申领指南,领取高龄津贴有哪些容易忽略的注意事项？,pitfalls,True,1.0,1.0,1.0,1.0,1.0,,0.36,通过
+elder_contact,高龄老人津贴申领指南,高龄津贴打哪个电话咨询？,contact,True,1.0,1.0,1.0,1.0,1.0,,0.35,通过
+elder_out_of_scope,高龄老人津贴申领指南,今天天气怎么样？,out_of_scope,False,,,,,,1.0,0.24,通过
+housing_materials,公共租赁住房申请指南,申请公租房需要准备哪些材料？,materials,True,1.0,1.0,1.0,1.0,1.0,,0.41,通过
+housing_deadline,公共租赁住房申请指南,公租房审核一般要多久？,deadline,True,1.0,1.0,1.0,1.0,1.0,,0.4,通过
+housing_benefit,公共租赁住房申请指南,公租房的租金标准是什么？,benefit,True,1.0,1.0,1.0,1.0,1.0,,0.4,通过
+housing_audience,公共租赁住房申请指南,哪些人可以申请公租房？,audience,True,1.0,1.0,1.0,1.0,1.0,,0.54,通过
+housing_steps,公共租赁住房申请指南,公租房的申请流程是什么？,steps,True,1.0,1.0,1.0,1.0,1.0,,0.39,通过
+housing_pitfalls,公共租赁住房申请指南,申请公租房有哪些注意事项？,pitfalls,True,1.0,1.0,1.0,1.0,1.0,,0.41,通过
+housing_contact,公共租赁住房申请指南,公租房政策打哪个电话咨询？,contact,True,1.0,1.0,1.0,1.0,1.0,,0.42,通过
+housing_out_of_scope,公共租赁住房申请指南,推荐一部电影？,out_of_scope,False,,,,,,1.0,0.4,通过
+medical_materials,城乡居民医保异地就医备案指南,异地就医备案需要哪些材料？,materials,True,1.0,1.0,1.0,1.0,1.0,,1.1,通过
+medical_deadline,城乡居民医保异地就医备案指南,异地就医备案多久能办好？,deadline,True,1.0,1.0,1.0,1.0,1.0,,0.7,通过
+medical_benefit,城乡居民医保异地就医备案指南,没有备案的话报销比例会怎样？,benefit,True,1.0,1.0,1.0,1.0,1.0,,1.13,通过
+medical_audience,城乡居民医保异地就医备案指南,哪些人需要办理异地就医备案？,audience,True,1.0,1.0,1.0,1.0,1.0,,1.3,通过
+medical_steps,城乡居民医保异地就医备案指南,异地就医备案怎么办理？,steps,True,1.0,1.0,1.0,1.0,1.0,,1.2,通过
+medical_pitfalls,城乡居民医保异地就医备案指南,异地就医有哪些容易踩的坑？,pitfalls,True,1.0,1.0,1.0,1.0,1.0,,1.07,通过
+medical_contact,城乡居民医保异地就医备案指南,医保备案打哪个电话咨询？,contact,True,1.0,1.0,1.0,1.0,1.0,,1.12,通过
+medical_out_of_scope,城乡居民医保异地就医备案指南,Python 怎么读文件？,out_of_scope,False,,,,,,1.0,0.46,通过
+flex_materials,灵活就业人员社保补贴申领指南,灵活就业社保补贴需要哪些材料？,materials,True,1.0,1.0,1.0,1.0,1.0,,0.83,通过
+flex_deadline,灵活就业人员社保补贴申领指南,灵活就业社保补贴最长能领多久？,benefit_duration,True,1.0,1.0,1.0,1.0,1.0,,0.69,通过
+flex_benefit,灵活就业人员社保补贴申领指南,灵活就业社保补贴的标准是什么？,benefit,True,1.0,1.0,1.0,1.0,1.0,,1.36,通过
+flex_audience,灵活就业人员社保补贴申领指南,哪些人可以申请灵活就业社保补贴？,audience,True,1.0,1.0,1.0,1.0,1.0,,1.26,通过
+flex_steps,灵活就业人员社保补贴申领指南,灵活就业社保补贴怎么申请？,steps,True,1.0,1.0,1.0,1.0,1.0,,0.95,通过
+flex_pitfalls,灵活就业人员社保补贴申领指南,申请灵活就业社保补贴要注意什么？,pitfalls,True,1.0,1.0,1.0,1.0,1.0,,1.02,通过
+flex_contact,灵活就业人员社保补贴申领指南,灵活就业补贴打哪个电话咨询？,contact,True,1.0,1.0,1.0,1.0,1.0,,0.63,通过
+flex_out_of_scope,灵活就业人员社保补贴申领指南,北京到上海有多远？,out_of_scope,False,,,,,,1.0,0.61,通过

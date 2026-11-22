@@ -50,6 +50,7 @@ class Settings:
     db_path: Path = Path(os.getenv("MORI_DB_PATH", str(BACKEND_DIR / "data" / "mori.db")))
     frontend_dir: Path = PROJECT_DIR / "frontend"
     sample_dir: Path = BACKEND_DIR / "sample_docs"
+    eval_dir: Path = BACKEND_DIR / "eval"
     top_k: int = _env_int("MORI_TOP_K", 4)
     chunk_size: int = _env_int("MORI_CHUNK_SIZE", 420)
     chunk_overlap: int = _env_int("MORI_CHUNK_OVERLAP", 70)
@@ -60,6 +61,8 @@ class Settings:
     assistant_minutes_per_policy: float = _env_float("MORI_ASSISTANT_MINUTES_PER_POLICY", 5.0)
     max_upload_mb: int = _env_int("MORI_MAX_UPLOAD_MB", 8)
     max_history_turns: int = _env_int("MORI_MAX_HISTORY_TURNS", 8)
+    rate_limit_per_minute: int = _env_int("MORI_RATE_LIMIT_PER_MINUTE", 240)
+    log_level: str = os.getenv("MORI_LOG_LEVEL", "INFO")
 
     @property
     def mode(self) -> str:

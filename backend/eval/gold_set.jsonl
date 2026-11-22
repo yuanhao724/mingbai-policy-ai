@@ -1,0 +1,32 @@
+{"id":"elder_materials","doc":"高龄老人津贴申领指南","question":"申请高龄津贴要带哪些证件？","intent":"materials","expected_keywords":["身份证","户口簿","银行卡","委托书"],"answerable":true}
+{"id":"elder_deadline","doc":"高龄老人津贴申领指南","question":"高龄津贴一般多久能办完？","intent":"deadline","expected_keywords":["3 个工作日","10 个工作日"],"answerable":true}
+{"id":"elder_benefit","doc":"高龄老人津贴申领指南","question":"80 岁老人每月能领多少钱？","intent":"benefit","expected_keywords":["100","200"],"answerable":true}
+{"id":"elder_audience","doc":"高龄老人津贴申领指南","question":"哪些老人可以申请高龄津贴？","intent":"audience","expected_keywords":["80 周岁","本地户籍"],"answerable":true}
+{"id":"elder_steps","doc":"高龄老人津贴申领指南","question":"高龄津贴的办理流程是什么？","intent":"steps","expected_keywords":["社区","街道","审批"],"answerable":true}
+{"id":"elder_pitfalls","doc":"高龄老人津贴申领指南","question":"领取高龄津贴有哪些容易忽略的注意事项？","intent":"pitfalls","expected_keywords":["迁出","重复","银行卡"],"answerable":true}
+{"id":"elder_contact","doc":"高龄老人津贴申领指南","question":"高龄津贴打哪个电话咨询？","intent":"contact","expected_keywords":["12345","社区"],"answerable":true}
+{"id":"elder_out_of_scope","doc":"高龄老人津贴申领指南","question":"今天天气怎么样？","intent":"out_of_scope","expected_keywords":[],"answerable":false}
+{"id":"housing_materials","doc":"公共租赁住房申请指南","question":"申请公租房需要准备哪些材料？","intent":"materials","expected_keywords":["申请表","身份证","居住证","劳动合同"],"answerable":true}
+{"id":"housing_deadline","doc":"公共租赁住房申请指南","question":"公租房审核一般要多久？","intent":"deadline","expected_keywords":["5 个工作日","20 个工作日","7 天"],"answerable":true}
+{"id":"housing_benefit","doc":"公共租赁住房申请指南","question":"公租房的租金标准是什么？","intent":"benefit","expected_keywords":["市场租金","减免","补贴"],"answerable":true}
+{"id":"housing_audience","doc":"公共租赁住房申请指南","question":"哪些人可以申请公租房？","intent":"audience","expected_keywords":["住房困难","新就业","外来务工"],"answerable":true}
+{"id":"housing_steps","doc":"公共租赁住房申请指南","question":"公租房的申请流程是什么？","intent":"steps","expected_keywords":["街道","公示","摇号"],"answerable":true}
+{"id":"housing_pitfalls","doc":"公共租赁住房申请指南","question":"申请公租房有哪些注意事项？","intent":"pitfalls","expected_keywords":["转租","隐瞒","轮候"],"answerable":true}
+{"id":"housing_contact","doc":"公共租赁住房申请指南","question":"公租房政策打哪个电话咨询？","intent":"contact","expected_keywords":["12345","住房保障"],"answerable":true}
+{"id":"housing_out_of_scope","doc":"公共租赁住房申请指南","question":"推荐一部电影？","intent":"out_of_scope","expected_keywords":[],"answerable":false}
+{"id":"medical_materials","doc":"城乡居民医保异地就医备案指南","question":"异地就医备案需要哪些材料？","intent":"materials","expected_keywords":["身份证","医保电子凭证","居住证明","转诊证明"],"answerable":true}
+{"id":"medical_deadline","doc":"城乡居民医保异地就医备案指南","question":"异地就医备案多久能办好？","intent":"deadline","expected_keywords":["1 到 3 个工作日","6 个月","5 个工作日"],"answerable":true}
+{"id":"medical_benefit","doc":"城乡居民医保异地就医备案指南","question":"没有备案的话报销比例会怎样？","intent":"benefit","expected_keywords":["报销比例","10 到 20"],"answerable":true}
+{"id":"medical_audience","doc":"城乡居民医保异地就医备案指南","question":"哪些人需要办理异地就医备案？","intent":"audience","expected_keywords":["异地长期居住","转诊","临时外出"],"answerable":true}
+{"id":"medical_steps","doc":"城乡居民医保异地就医备案指南","question":"异地就医备案怎么办理？","intent":"steps","expected_keywords":["国家医保服务平台","备案","医保码"],"answerable":true}
+{"id":"medical_pitfalls","doc":"城乡居民医保异地就医备案指南","question":"异地就医有哪些容易踩的坑？","intent":"pitfalls","expected_keywords":["先备案","就诊医院","统筹区"],"answerable":true}
+{"id":"medical_contact","doc":"城乡居民医保异地就医备案指南","question":"医保备案打哪个电话咨询？","intent":"contact","expected_keywords":["12393","医保"],"answerable":true}
+{"id":"medical_out_of_scope","doc":"城乡居民医保异地就医备案指南","question":"Python 怎么读文件？","intent":"out_of_scope","expected_keywords":[],"answerable":false}
+{"id":"flex_materials","doc":"灵活就业人员社保补贴申领指南","question":"灵活就业社保补贴需要哪些材料？","intent":"materials","expected_keywords":["身份证","就业创业证","缴费凭证","银行卡"],"answerable":true}
+{"id":"flex_deadline","doc":"灵活就业人员社保补贴申领指南","question":"灵活就业社保补贴最长能领多久？","intent":"benefit_duration","expected_keywords":["3 年","退休"],"answerable":true}
+{"id":"flex_benefit","doc":"灵活就业人员社保补贴申领指南","question":"灵活就业社保补贴的标准是什么？","intent":"benefit","expected_keywords":["补贴","比例"],"answerable":true}
+{"id":"flex_audience","doc":"灵活就业人员社保补贴申领指南","question":"哪些人可以申请灵活就业社保补贴？","intent":"audience","expected_keywords":["就业困难","高校毕业生","灵活就业"],"answerable":true}
+{"id":"flex_steps","doc":"灵活就业人员社保补贴申领指南","question":"灵活就业社保补贴怎么申请？","intent":"steps","expected_keywords":["灵活就业登记","街道","公示"],"answerable":true}
+{"id":"flex_pitfalls","doc":"灵活就业人员社保补贴申领指南","question":"申请灵活就业社保补贴要注意什么？","intent":"pitfalls","expected_keywords":["先缴后补","重复"],"answerable":true}
+{"id":"flex_contact","doc":"灵活就业人员社保补贴申领指南","question":"灵活就业补贴打哪个电话咨询？","intent":"contact","expected_keywords":["12333","人社"],"answerable":true}
+{"id":"flex_out_of_scope","doc":"灵活就业人员社保补贴申领指南","question":"北京到上海有多远？","intent":"out_of_scope","expected_keywords":[],"answerable":false}

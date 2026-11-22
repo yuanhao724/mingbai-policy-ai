@@ -17,7 +17,10 @@ CREATE TABLE IF NOT EXISTS documents (
     content TEXT NOT NULL,
     size_bytes INTEGER NOT NULL DEFAULT 0,
     chunk_count INTEGER NOT NULL DEFAULT 0,
-    created_at TEXT NOT NULL
+    created_at TEXT NOT NULL,
+    review_status TEXT NOT NULL DEFAULT 'draft',
+    reviewer TEXT NOT NULL DEFAULT '',
+    reviewed_at TEXT NOT NULL DEFAULT ''
 );
 CREATE TABLE IF NOT EXISTS chunks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,6 +37,14 @@ CREATE TABLE IF NOT EXISTS queries (
     mode TEXT NOT NULL,
     sources_json TEXT NOT NULL,
     latency_ms REAL NOT NULL,
+    created_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    action TEXT NOT NULL,
+    actor TEXT NOT NULL,
+    target TEXT NOT NULL,
+    detail TEXT NOT NULL,
     created_at TEXT NOT NULL
 );
 """
@@ -56,6 +67,15 @@ def init_db(path: Path) -> None:
     conn = connect(path)
     try:
         conn.executescript(SCHEMA)
+        columns = {row["name"] for row in conn.execute("PRAGMA table_info(documents)")}
+        migrations = {
+            "review_status": "TEXT NOT NULL DEFAULT 'draft'",
+            "reviewer": "TEXT NOT NULL DEFAULT ''",
+            "reviewed_at": "TEXT NOT NULL DEFAULT ''",
+        }
+        for name, definition in migrations.items():
+            if name not in columns:
+                conn.execute(f"ALTER TABLE documents ADD COLUMN {name} {definition}")
         conn.commit()
     finally:
         conn.close()
@@ -79,14 +99,29 @@ def add_document(
     content: str,
     size_bytes: int,
     chunks: Sequence[str],
+    review_status: str = "draft",
+    reviewer: str = "",
 ) -> dict:
     doc_id = uuid.uuid4().hex[:12]
     created = utc_now()
+    reviewed_at = created if review_status == "approved" else ""
     with session(path) as conn:
         conn.execute(
-            "INSERT INTO documents (id, title, filename, content, size_bytes, chunk_count, created_at) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?)",
-            (doc_id, title, filename, content, size_bytes, len(chunks), created),
+            "INSERT INTO documents "
+            "(id, title, filename, content, size_bytes, chunk_count, created_at, review_status, reviewer, reviewed_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                doc_id,
+                title,
+                filename,
+                content,
+                size_bytes,
+                len(chunks),
+                created,
+                review_status,
+                reviewer,
+                reviewed_at,
+            ),
         )
         conn.executemany(
             "INSERT INTO chunks (doc_id, ord, text) VALUES (?, ?, ?)",
@@ -99,13 +134,17 @@ def add_document(
         "size_bytes": size_bytes,
         "chunk_count": len(chunks),
         "created_at": created,
+        "review_status": review_status,
+        "reviewer": reviewer,
+        "reviewed_at": reviewed_at,
     }
 
 
 def list_documents(path: Path) -> list[dict]:
     with session(path) as conn:
         rows = conn.execute(
-            "SELECT id, title, filename, size_bytes, chunk_count, created_at "
+            "SELECT id, title, filename, size_bytes, chunk_count, created_at, "
+            "review_status, reviewer, reviewed_at "
             "FROM documents ORDER BY created_at DESC, rowid DESC"
         ).fetchall()
     return [dict(row) for row in rows]
@@ -114,7 +153,8 @@ def list_documents(path: Path) -> list[dict]:
 def get_document(path: Path, doc_id: str) -> dict | None:
     with session(path) as conn:
         row = conn.execute(
-            "SELECT id, title, filename, content, size_bytes, chunk_count, created_at "
+            "SELECT id, title, filename, content, size_bytes, chunk_count, created_at, "
+            "review_status, reviewer, reviewed_at "
             "FROM documents WHERE id = ?",
             (doc_id,),
         ).fetchone()
@@ -125,6 +165,50 @@ def delete_document(path: Path, doc_id: str) -> bool:
     with session(path) as conn:
         cur = conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
     return cur.rowcount > 0
+
+
+def review_document(
+    path: Path,
+    doc_id: str,
+    *,
+    status: str,
+    reviewer: str,
+    note: str = "",
+) -> dict | None:
+    reviewed_at = utc_now()
+    with session(path) as conn:
+        cursor = conn.execute(
+            "UPDATE documents SET review_status = ?, reviewer = ?, reviewed_at = ? WHERE id = ?",
+            (status, reviewer, reviewed_at, doc_id),
+        )
+        if cursor.rowcount == 0:
+            return None
+        conn.execute(
+            "INSERT INTO audit_logs (action, actor, target, detail, created_at) VALUES (?, ?, ?, ?, ?)",
+            (
+                "policy.review",
+                reviewer,
+                doc_id,
+                json.dumps({"status": status, "note": note}, ensure_ascii=False),
+                reviewed_at,
+            ),
+        )
+        row = conn.execute(
+            "SELECT id, title, filename, size_bytes, chunk_count, created_at, "
+            "review_status, reviewer, reviewed_at FROM documents WHERE id = ?",
+            (doc_id,),
+        ).fetchone()
+    return dict(row) if row else None
+
+
+def recent_audit(path: Path, limit: int = 40) -> list[dict]:
+    with session(path) as conn:
+        rows = conn.execute(
+            "SELECT id, action, actor, target, detail, created_at "
+            "FROM audit_logs ORDER BY id DESC LIMIT ?",
+            (limit,),
+        ).fetchall()
+    return [dict(row) for row in rows]
 
 
 def all_chunks(path: Path) -> list[dict]:

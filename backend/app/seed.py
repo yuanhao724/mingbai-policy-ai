@@ -32,6 +32,8 @@ def seed_if_empty() -> int:
             content=text,
             size_bytes=len(text.encode("utf-8")),
             chunks=chunks,
+            review_status="approved",
+            reviewer="system",
         )
         created += 1
     return created

@@ -1,0 +1,18 @@
+services:
+  mori:
+    build: .
+    image: mori:local
+    ports:
+      - "8000:8000"
+    environment:
+      MORI_DB_PATH: /app/backend/data/mori.db
+      MORI_RATE_LIMIT_PER_MINUTE: ${MORI_RATE_LIMIT_PER_MINUTE:-240}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      MORI_MODEL: ${MORI_MODEL:-gpt-4o-mini}
+    volumes:
+      - mori-data:/app/backend/data
+    restart: unless-stopped
+
+volumes:
+  mori-data:

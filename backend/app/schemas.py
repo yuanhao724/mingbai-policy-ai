@@ -28,3 +28,12 @@ class DocumentOut(BaseModel):
     size_bytes: int
     chunk_count: int
     created_at: str
+    review_status: str = "draft"
+    reviewer: str = ""
+    reviewed_at: str = ""
+
+
+class ReviewRequest(BaseModel):
+    status: str = Field(pattern="^(approved|rejected|draft)$")
+    reviewer: str = Field(min_length=2, max_length=40)
+    note: str = Field(default="", max_length=500)

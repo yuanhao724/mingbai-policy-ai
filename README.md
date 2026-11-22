@@ -12,6 +12,10 @@
 
 ![明白办事工作台](docs/screenshots/workbench-desktop.png)
 
+![质量评测](docs/screenshots/eval-desktop.png)
+
+![审核台](docs/screenshots/review-desktop.png)
+
 ## 为什么做
 
 - 政策不是没有，是看不懂。关键条件藏在术语、附件和长段落里，老人和新市民最容易卡住。
@@ -28,6 +32,9 @@
 - 材料清单：可勾选、记录进度、导出 Markdown、打印。
 - 适老化：大字模式、浏览器朗读、键盘可操作、移动端单列布局。
 - 不串政策：问答锁定当前 `doc_id`，回答只基于当前政策。
+- 人工审核：政策默认待审核，审核台可标记通过或驳回，所有动作写入审计日志。
+- 质量评测：32 条离线问题，检查 Hit@3、引用有效性、引用支撑、关键词召回、拒答和延迟。
+- 可观测性：请求 ID、结构化日志、Prometheus 指标、限流、安全响应头和 readiness 探针。
 - 双模式：没有 API Key 时使用本地 TF-IDF 检索和抽取式回答；配置 `OPENAI_API_KEY` 后切换到在线模型，失败自动回退。
 
 ## 效果数据
@@ -42,10 +49,24 @@
 | 平均材料清单 | 3-7 项 |
 | 平均办理流程 | 3-6 步 |
 | 预计节省 | 约 128 分钟（演示估算） |
-| 自动化测试 | 14 个全部通过 |
+| 离线评测 | 32 条问题，Hit@3 100%，引用有效 100%，拒答 100% |
+| Hit@1 排序 | 85.7%，4 条 Top1 未命中但 Top3 命中 |
+| 自动化测试 | 26 个全部通过 |
+| 硬失败样例 | 0 条 |
 | 响应式检查 | 桌面 1440px 与手机 390px 均无横向溢出 |
 
 估算口径：人工整理 30 分钟 / 政策、助手 5 分钟；人工问答 6 分钟、助手 0.5 分钟。数据只用于说明产品价值，实际效果需要在社区试点中验证。
+
+## 工程质量
+
+- 评测：32 条问题，28 条可回答，4 条跨域拒答；Hit@3 100%，引用有效/覆盖/支撑 100%，拒答 100%，Top1 85.7%，P95 约 1ms。
+- 测试：26 个 unittest 覆盖切块、检索、政策抽取、问答范围、拒答、上传删除、评测指标、审核、限流和指标输出。
+- 治理：AI 生成政策卡默认待审核，审核动作写入 `audit_logs`。演示用 `X-Mori-Role` 模拟角色，生产应接 SSO / RBAC。
+- 可观测性：`X-Request-ID`、JSON 访问日志、`/api/metrics`、`/api/live`、`/api/ready`。
+- 安全：上传限制、参数化 SQL、CSP、安全响应头、240 请求/分钟/IP 限流。
+- 交付：Dockerfile、docker-compose、GitHub Actions（Python 3.11 / 3.12 / 3.13 + Docker build）、Makefile。
+
+详细材料：[作品集技术说明](docs/PORTFOLIO.md)、[评测报告](docs/EVALUATION.md)、[运行与运维](docs/OPERATIONS.md)。
 
 ## 架构
 
@@ -54,14 +75,19 @@
    │  fetch + SSE
    ▼
 FastAPI
+   ├─ middleware：请求 ID、结构化日志、Prometheus、限流、安全头
    ├─ documents 路由：上传、解码、切块、入库、删除
    ├─ policy 路由：政策原文 → 明白卡结构化抽取
    ├─ chat 路由：当前政策检索、意图识别、SSE 流式回答
+   ├─ reviews 路由：人工审核 + 审计日志
+   ├─ eval 路由：最新离线评测报告
+   ├─ system 路由：live / ready / metrics
    └─ stats 路由：文档数、片段数、问答数、耗时和节省估算
    │
-   ├─ SQLite：documents / chunks / queries
+   ├─ SQLite：documents / chunks / queries / audit_logs
    ├─ scikit-learn：字符 n-gram TF-IDF 检索
-   └─ OpenAI（可选）：chat completions 流式回答
+   ├─ OpenAI（可选）：chat completions 流式回答
+   └─ Docker / GitHub Actions：构建、测试、评测质量门
 ```
 
 关键设计：
@@ -79,7 +105,10 @@ FastAPI
 - scikit-learn TF-IDF
 - 原生 HTML / CSS / JavaScript（零构建）
 - SSE（Server-Sent Events）
-- unittest + FastAPI TestClient
+- unittest + FastAPI TestClient（26 个测试）
+- Prometheus 文本指标、请求 ID、结构化日志、令牌桶限流
+- 人工审核 + 审计日志
+- Docker、docker-compose、GitHub Actions、Makefile
 - Edge 无头浏览器 + CDP 做真实布局 QA
 - 字体：Noto Serif SC / Noto Sans SC（本机可用，失败时回退宋体 / 雅黑）
 
@@ -101,6 +130,14 @@ python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 打开 [http://127.0.0.1:8000](http://127.0.0.1:8000)。
 
 首次启动会自动创建 SQLite 数据库，并导入 `backend/sample_docs/` 下的 4 份示例政策。示例政策仅用于产品演示，具体以当地官方最新发布为准。
+
+### Docker
+
+```powershell
+docker compose up --build
+```
+
+当前开发环境的 Docker daemon 未启动，所以镜像没有在本地实际构建；GitHub Actions 里包含 Docker build job。生产镜像使用非 root 用户、HEALTHCHECK 和 `/api/ready` 探针。
 
 如果换一台机器且依赖缺失：
 
@@ -134,6 +171,12 @@ MORI_MODEL=gpt-4o-mini
 | DELETE | `/api/documents/{id}` | 删除文档和片段 |
 | GET | `/api/policy/{id}/card` | 生成明白卡 |
 | POST | `/api/chat/stream` | 当前政策问答，SSE 流式返回 |
+| GET | `/api/reviews` | 审核列表和审计日志 |
+| POST | `/api/reviews/{id}` | 审核政策，演示需 `X-Mori-Role: reviewer` |
+| GET | `/api/eval/latest` | 最新离线评测报告 |
+| GET | `/api/live` | 存活检查 |
+| GET | `/api/ready` | 就绪检查（数据库可用） |
+| GET | `/api/metrics` | Prometheus 文本指标 |
 | GET | `/api/stats` | 文档、片段、问答和节省估算 |
 | POST | `/api/extract` | 按问题抽取相关原文片段 |
 
@@ -143,29 +186,41 @@ MORI_MODEL=gpt-4o-mini
 mori/
 ├─ backend/
 │  ├─ app/
-│  │  ├─ api/            # documents / policy / chat / stats 路由
+│  │  ├─ api/            # documents / policy / chat / reviews / eval / system / stats
 │  │  ├─ answer.py       # 意图识别、本地抽取式回答、提示词
 │  │  ├─ chunking.py     # 段落感知切块，保留 Markdown 结构
 │  │  ├─ config.py       # 环境变量和 .env 加载
-│  │  ├─ db.py           # SQLite schema 和仓储函数
+│  │  ├─ db.py           # SQLite schema、审核、审计和仓储函数
 │  │  ├─ llm.py          # OpenAI 流式客户端
+│  │  ├─ observability.py # 请求 ID、日志、Prometheus、限流、安全头
 │  │  ├─ policy.py       # 政策 → 明白卡结构化抽取
+│  │  ├─ qa.py           # 单政策上下文构建（chat/eval 共用）
 │  │  ├─ retrieval.py    # 字符 n-gram TF-IDF 检索
 │  │  └─ main.py         # FastAPI 入口和静态资源
+│  ├─ eval/              # gold_set、评测脚本、report.json/md/csv
 │  ├─ sample_docs/       # 4 份示例政策
-│  ├─ tests/             # unittest + TestClient
+│  ├─ tests/             # 26 个 unittest + TestClient
 │  └─ requirements.txt
 ├─ frontend/
 │  ├─ index.html         # 主页面
 │  ├─ styles.css         # 市民 editorial 视觉系统
 │  ├─ app.js             # 明白卡渲染、SSE、上传、导出、朗读
+│  ├─ eval/              # 质量评测看板
+│  ├─ review/            # 人工审核台
 │  └─ case-study/        # 一页纸案例网页版
 ├─ case-study/
 │  ├─ 明白办事_AI应用案例.md
 │  └─ 明白办事_AI应用案例.pdf
 ├─ docs/
-│  ├─ DESIGN.md
-│  └─ VIBE_CODING_LOG.md
+│  ├─ PORTFOLIO.md       # 系统设计、取舍、评测、扩展
+│  ├─ OPERATIONS.md      # 运行、监控、限流、备份、事故处理
+│  ├─ EVALUATION.md      # 评测方法和结果
+│  ├─ DESIGN.md          # 视觉设计说明
+│  └─ VIBE_CODING_LOG.md # AI 辅助开发记录
+├─ Dockerfile
+├─ docker-compose.yml
+├─ Makefile
+├─ .github/workflows/ci.yml
 ├─ run.ps1
 ├─ run.sh
 └─ .env.example
@@ -186,18 +241,32 @@ python -m unittest discover -s tests -v
 - 政策卡字段抽取和引用
 - API 健康检查、种子数据、政策卡
 - 问答锁定当前政策
+- 跨域拒答和意图识别
 - 上传、删除和 404
+- 人工审核、权限头和审计日志
+- 评测指标（Hit@1/3、引用、关键词召回、拒答）
+- 请求 ID、安全响应头、Prometheus、readiness
+- 令牌桶限流
 - 统计接口
 
-当前结果：14 个测试全部通过。
+当前结果：26 个测试全部通过。
+
+离线评测：
+
+```powershell
+cd backend
+python eval/run_eval.py --check
+```
+
+当前质量门通过：Hit@3 100%，引用有效/覆盖/支撑 100%，关键词召回 100%，拒答 100%，Groundedness 100%，Top1 85.7%，P95 约 1ms。
 
 ## 简历怎么写
 
 可以直接用这三条：
 
-- 独立设计并实现「明白办事」政策翻译助手，基于 FastAPI + SQLite + scikit-learn，完成政策卡抽取、原文引用、流式问答和响应式前端，14 个自动化测试全部通过。
-- 设计「政策原文 → 结构化明白卡」管线，覆盖适用对象、待遇、材料、流程、时限、注意事项 7 类字段；问答锁定当前政策，引用编号与原文片段一一对应。
-- 实现 SSE 流式问答和无 Key 本地降级，离线响应约 0.7 秒；完成桌面 / 手机适配、大字与朗读、Markdown 导出和一页纸案例材料。
+- 独立设计并实现「明白办事」政策翻译助手，基于 FastAPI + SQLite + scikit-learn，完成政策卡抽取、原文引用、流式问答、人工审核和响应式前端，26 个自动化测试全部通过。
+- 设计 32 条离线评测集，覆盖 28 条可回答问题 + 4 条跨域拒答；Hit@3 100%，引用有效/支撑 100%，拒答 100%，Top1 85.7%，并暴露 4 条排序改进样例。
+- 补齐生产工程链路：请求 ID、JSON 日志、Prometheus、令牌桶限流、安全响应头、Docker/CI、人工审核和审计日志；离线 P95 < 2ms。
 
 ## 面试可讲的点
 
@@ -207,6 +276,10 @@ python -m unittest discover -s tests -v
 - SSE 和 WebSocket 的取舍是什么？
 - 规则抽取和大模型抽取各自适合什么场景？
 - 怎么验证一个 AI 应用不是「看起来能跑」？
+- 为什么 Groundedness 100% 不能当成模型不会幻觉的证明？
+- 32 条评测集怎么避免自嗨和 cherry-picking？
+- 人工审核在 AI 产品里承担什么责任？
+- 如果 QPS 涨 100 倍，SQLite、限流和索引怎么改？
 - 如果接入真实政策库，下一步怎么做评估和人工审核？
 
 ## AI 辅助开发说明
@@ -229,6 +302,8 @@ python -m unittest discover -s tests -v
 - 当前支持 txt / md / csv；PDF 和扫描件解析是下一步。
 - 本地模式是抽取式兜底，语言自然度不如在线模型；在线模式需要 API Key。
 - 单政策上下文最多取 12 个片段，超长政策需要分段摘要或 map-reduce。
+- 32 条评测集是小样本，Groundedness 是代理指标，真实效果仍需社区试点。
+- 当前环境 Docker daemon 未启动，镜像构建由 CI 负责验证。
 - 真实效果需要在社区试点中验证：材料漏带率、窗口重复咨询量、居民完成率。
 
 ## 案例材料
@@ -236,5 +311,10 @@ python -m unittest discover -s tests -v
 - [一页纸案例 Markdown](case-study/明白办事_AI应用案例.md)
 - [一页纸案例 PDF](case-study/明白办事_AI应用案例.pdf)
 - [案例网页版](frontend/case-study/index.html)
+- [作品集技术说明](docs/PORTFOLIO.md)
+- [评测方法与结果](docs/EVALUATION.md)
+- [运行与运维手册](docs/OPERATIONS.md)
+- [质量评测看板](http://127.0.0.1:8000/static/eval/index.html)
+- [人工审核台](http://127.0.0.1:8000/static/review/index.html)
 
 示例政策仅用于产品演示，具体条件、金额和时限以当地官方最新发布为准。

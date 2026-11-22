@@ -718,6 +718,7 @@
         list.innerHTML = "";
       });
       $("#sources-list").innerHTML = "";
+      $("#review-badge").hidden = true;
       $("#chat-form").querySelector("textarea").disabled = true;
       $("#send-btn").disabled = true;
       return;
@@ -733,6 +734,7 @@
     const previous = preferredId || state.currentDocId;
     const chosen = docs.some((doc) => doc.id === previous) ? previous : docs[0].id;
     select.value = chosen;
+    updateReviewBadge();
     $("#chat-form").querySelector("textarea").disabled = false;
     $("#send-btn").disabled = false;
     await loadCard(chosen);
@@ -751,6 +753,7 @@
     }
 
     state.currentDocId = docId;
+    updateReviewBadge();
     resetDeleteState();
     $("#card-loading").hidden = false;
     $("#card-content").style.opacity = "0.35";
@@ -770,6 +773,24 @@
     } finally {
       $("#card-loading").hidden = true;
     }
+  }
+
+  function updateReviewBadge() {
+    const badge = $("#review-badge");
+    if (!badge) return;
+    const doc = state.documents.find((item) => item.id === state.currentDocId);
+    if (!doc) {
+      badge.hidden = true;
+      return;
+    }
+    badge.hidden = false;
+    const status = doc.review_status || "draft";
+    badge.className = `badge review-badge ${status}`;
+    badge.textContent =
+      status === "approved" ? "已审核" : status === "rejected" ? "已驳回" : "待审核";
+    badge.title = doc.reviewer
+      ? `${doc.reviewer} · ${doc.reviewed_at}`
+      : "打开审核台";
   }
 
   function scrollToSource(number) {

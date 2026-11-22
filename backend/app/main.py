@@ -8,8 +8,10 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import db
-from .api import chat, documents, policy, stats
+from .api import chat, documents, evaluation, policy, reviews, stats, system
 from .config import settings
+from .observability import RequestContextMiddleware, RateLimitMiddleware, setup_logging
+from .observability import metrics
 from .seed import seed_if_empty
 
 
@@ -27,6 +29,8 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+setup_logging()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -34,10 +38,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.add_middleware(RateLimitMiddleware, limit_per_minute=settings.rate_limit_per_minute)
+app.add_middleware(RequestContextMiddleware, registry=metrics)
+
 app.include_router(documents.router)
 app.include_router(chat.router)
 app.include_router(policy.router)
+app.include_router(evaluation.router)
+app.include_router(reviews.router)
 app.include_router(stats.router)
+app.include_router(system.router)
 
 if settings.frontend_dir.exists():
     app.mount("/static", StaticFiles(directory=str(settings.frontend_dir)), name="static")

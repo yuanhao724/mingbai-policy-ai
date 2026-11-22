@@ -1,0 +1,12 @@
+.git
+.env
+__pycache__
+*.pyc
+*.pyo
+*.log
+backend/data/*.db
+backend/data/*.db-*
+backend/tests
+docs
+case-study
+work

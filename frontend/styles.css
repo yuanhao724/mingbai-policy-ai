@@ -1646,6 +1646,29 @@ button {
   color: var(--accent-deep);
 }
 
+.review-badge {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  transition:
+    transform 0.4s var(--ease),
+    background 0.4s var(--ease),
+    color 0.4s var(--ease);
+}
+
+.review-badge:hover {
+  transform: translateY(-1px);
+}
+
+.review-badge.approved {
+  background: var(--sage-soft);
+  color: var(--sage);
+}
+
+.review-badge.rejected {
+  background: #f4d8d1;
+  color: var(--accent-deep);
+}
+
 .chat-log {
   display: flex;
   flex: 1;

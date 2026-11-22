@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="明白办事人工审核台：AI 生成的政策卡需要经过人工确认后才能发布。">
+  <title>明白办事 · 审核台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23B5432C'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='30' fill='%23F2F0E9' font-family='serif'%3E明%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    .review-top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 245, 0.94);
+    }
+
+    .review-top-inner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+    }
+
+    .review-top-links {
+      display: flex;
+      gap: 0.3rem;
+      margin-left: auto;
+      color: var(--ink-2);
+      font-size: 0.82rem;
+    }
+
+    .review-top-links a {
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.5s var(--ease), color 0.5s var(--ease);
+    }
+
+    .review-top-links a:hover {
+      background: rgba(23, 33, 27, 0.04);
+      color: var(--ink);
+    }
+
+    .review-main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(3rem, 7vw, 6rem) 1.5rem 5rem;
+    }
+
+    .review-hero {
+      max-width: 850px;
+      margin-bottom: 2.5rem;
+    }
+
+    .review-hero h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .review-note {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 1.1rem;
+      background: var(--card-warm);
+      color: var(--ink-2);
+      font-size: 0.8rem;
+      line-height: 1.65;
+    }
+
+    .review-note::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 2px;
+      height: 2.5rem;
+      background: var(--accent);
+    }
+
+    .review-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 1.2rem;
+      background: var(--card);
+    }
+
+    .review-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .review-field label {
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    .review-field input {
+      min-width: 12rem;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 0.8rem;
+      outline: 0;
+      background: var(--card);
+      color: var(--ink);
+      font-size: 0.84rem;
+      transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    }
+
+    .review-field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(181, 67, 44, 0.12);
+    }
+
+    .review-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: auto;
+    }
+
+    .review-status {
+      min-height: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .review-status.error {
+      color: var(--accent-deep);
+    }
+
+    .review-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 1.2rem;
+      background: var(--card);
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .review-table th,
+    .review-table td {
+      padding: 0.8rem 0.9rem;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .review-table th {
+      color: var(--muted);
+      font-family: var(--font-ui);
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .review-table td:first-child {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .review-table small {
+      display: block;
+      color: var(--muted-2);
+      font-weight: 400;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      font-family: var(--font-ui);
+      font-size: 0.66rem;
+      white-space: nowrap;
+    }
+
+    .status-pill.approved {
+      background: var(--sage-soft);
+      color: var(--sage);
+    }
+
+    .status-pill.draft {
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+    }
+
+    .status-pill.rejected {
+      background: #f4d8d1;
+      color: var(--accent-deep);
+    }
+
+    .review-buttons {
+      display: flex;
+      gap: 0.4rem;
+      white-space: nowrap;
+    }
+
+    .review-buttons button {
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--ink-2);
+      font-size: 0.7rem;
+      transition: background 0.4s var(--ease), color 0.4s var(--ease);
+    }
+
+    .review-buttons button:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .review-buttons button.reject:hover {
+      background: var(--accent-deep);
+      color: #fff7ee;
+    }
+
+    .audit-panel {
+      margin-top: 1.5rem;
+      padding: 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: 1.3rem;
+      background: var(--card);
+    }
+
+    .audit-panel h2 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .audit-list li {
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      gap: 0.8rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--line);
+      color: var(--ink-2);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .audit-list li:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .audit-list time {
+      color: var(--muted-2);
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+    }
+
+    .review-empty {
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .review-top-links {
+        display: none;
+      }
+
+      .review-main {
+        padding: 2.5rem 1.25rem 4rem;
+      }
+
+      .review-controls {
+        align-items: stretch;
+      }
+
+      .review-field,
+      .review-field input {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .review-actions {
+        margin-left: 0;
+      }
+
+      .review-table th:nth-child(3),
+      .review-table td:nth-child(3) {
+        display: none;
+      }
+
+      .audit-list li {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="paper-grid" aria-hidden="true"></div>
+
+  <header class="review-top">
+    <div class="review-top-inner">
+      <a class="brand" href="/" aria-label="返回明白办事">
+        <span class="brand-mark" aria-hidden="true">明</span>
+        <span class="brand-text">明白办事<small>MINGBAI</small></span>
+      </a>
+      <nav class="review-top-links" aria-label="审核导航">
+        <a href="/">工作台</a>
+        <a href="/static/eval/index.html">质量评测</a>
+        <a href="/static/case-study/index.html">一页纸案例</a>
+      </nav>
+      <a class="btn btn-primary" href="/">
+        返回工作台
+        <span class="btn-icon" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="review-main">
+    <section class="review-hero">
+      <p class="eyebrow">HUMAN IN THE LOOP</p>
+      <h1>审核台</h1>
+      <p class="lede">
+        AI 生成的政策卡不能直接发布。审核员检查原文、结论和引用后，标记为通过或驳回，所有动作写入审计日志。
+      </p>
+    </section>
+
+    <div class="review-note">
+      演示环境用 <code>X-Mori-Role: reviewer</code> 模拟审核员角色。生产环境应接入 SSO、RBAC 和更细粒度的权限，不能把角色头当作真实鉴权。
+    </div>
+
+    <div class="review-controls">
+      <div class="review-field">
+        <label for="reviewer">审核员</label>
+        <input id="reviewer" value="社区审核员" maxlength="40" autocomplete="name">
+      </div>
+      <div class="review-field">
+        <label for="review-note">审核备注（可选）</label>
+        <input id="review-note" placeholder="例如：已核对 2026 年 11 月版本" maxlength="500">
+      </div>
+      <div class="review-actions">
+        <button type="button" class="btn btn-ghost" id="refresh-review">刷新</button>
+      </div>
+    </div>
+    <p id="review-status" class="review-status" role="status"></p>
+
+    <div class="review-table-wrap">
+      <table class="review-table">
+        <thead>
+          <tr>
+            <th>政策</th>
+            <th>状态</th>
+            <th>审核人 / 时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="review-rows">
+          <tr><td colspan="4" class="review-empty">正在读取政策…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section class="audit-panel">
+      <h2>审计日志</h2>
+      <ol id="audit-list" class="audit-list">
+        <li class="review-empty">正在读取日志…</li>
+      </ol>
+    </section>
+  </main>
+</body>
+<script>
+  (() => {
+    "use strict";
+
+    const $ = (selector) => document.querySelector(selector);
+    const escapeHtml = (value) =>
+      String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[char]));
+
+    const statusLabel = (status) =>
+      status === "approved" ? "已通过" : status === "rejected" ? "已驳回" : "待审核";
+
+    const statusClass = (status) =>
+      status === "approved" ? "approved" : status === "rejected" ? "rejected" : "draft";
+
+    function setStatus(message, error = false) {
+      const element = $("#review-status");
+      element.textContent = message;
+      element.classList.toggle("error", error);
+    }
+
+    async function load() {
+      try {
+        const response = await fetch("/api/reviews");
+        if (!response.ok) throw new Error(`请求失败（${response.status}）`);
+        const data = await response.json();
+        renderDocuments(data.documents || []);
+        renderAudit(data.audit || []);
+      } catch (error) {
+        setStatus(error.message || "读取审核数据失败。", true);
+      }
+    }
+
+    function renderDocuments(documents) {
+      const body = $("#review-rows");
+      if (!documents.length) {
+        body.innerHTML = '<tr><td colspan="4" class="review-empty">还没有政策。</td></tr>';
+        return;
+      }
+      body.innerHTML = documents
+        .map(
+          (doc) => `
+            <tr>
+              <td>
+                ${escapeHtml(doc.title)}
+                <small>${escapeHtml(doc.filename)}</small>
+              </td>
+              <td>
+                <span class="status-pill ${statusClass(doc.review_status)}">
+                  ${statusLabel(doc.review_status)}
+                </span>
+              </td>
+              <td>
+                ${doc.reviewer ? escapeHtml(doc.reviewer) : "未审核"}
+                <small>${doc.reviewed_at ? escapeHtml(doc.reviewed_at) : "等待审核"}</small>
+              </td>
+              <td>
+                <div class="review-buttons">
+                  <button type="button" data-review="approved" data-id="${doc.id}">通过</button>
+                  <button type="button" class="reject" data-review="rejected" data-id="${doc.id}">驳回</button>
+                </div>
+              </td>
+            </tr>
+          `
+        )
+        .join("");
+    }
+
+    function renderAudit(audit) {
+      const list = $("#audit-list");
+      if (!audit.length) {
+        list.innerHTML = '<li class="review-empty">还没有审核动作。</li>';
+        return;
+      }
+      list.innerHTML = audit
+        .slice(0, 20)
+        .map((item) => {
+          let detail = {};
+          try {
+            detail = JSON.parse(item.detail || "{}");
+          } catch {
+            detail = {};
+          }
+          const note = detail.note ? ` · ${escapeHtml(detail.note)}` : "";
+          return `
+            <li>
+              <time>${escapeHtml(item.created_at)}</time>
+              <span>
+                <strong>${escapeHtml(item.actor)}</strong>
+                将
+                <strong>${escapeHtml(item.target)}</strong>
+                标记为
+                <strong>${statusLabel(detail.status)}</strong>${note}
+              </span>
+            </li>
+          `;
+        })
+        .join("");
+    }
+
+    async function review(id, status) {
+      const reviewer = $("#reviewer").value.trim();
+      if (reviewer.length < 2) {
+        setStatus("审核员名字至少 2 个字。", true);
+        return;
+      }
+      const note = $("#review-note").value.trim();
+      setStatus("正在提交审核…");
+      try {
+        const response = await fetch(`/api/reviews/${id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Mori-Role": "reviewer",
+          },
+          body: JSON.stringify({ status, reviewer, note }),
+        });
+        if (!response.ok) {
+          const payload = await response.json().catch(() => ({}));
+          throw new Error(payload.detail || `提交失败（${response.status}）`);
+        }
+        setStatus(status === "approved" ? "已标记为通过。" : "已标记为驳回。");
+        await load();
+      } catch (error) {
+        setStatus(error.message || "提交失败。", true);
+      }
+    }
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-review]");
+      if (button) {
+        review(button.dataset.id, button.dataset.review);
+      }
+    });
+
+    $("#refresh-review").addEventListener("click", () => {
+      setStatus("正在刷新…");
+      load().then(() => setStatus("已刷新。"));
+    });
+
+    load();
+  })();
+</script>
+</html>

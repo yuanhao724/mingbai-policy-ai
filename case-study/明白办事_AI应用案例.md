@@ -20,7 +20,7 @@
 
 ## b. 用了什么工具
 
-**技术栈：** Python 3.13、FastAPI、SQLite、scikit-learn TF-IDF、原生 HTML/CSS/JS、SSE、ChatGPT / Claude Code 式 AI 编程。
+**技术栈：** Python 3.13、FastAPI、SQLite、scikit-learn TF-IDF、原生 HTML/CSS/JS、SSE、Prometheus、Docker、GitHub Actions、人工审核 + 审计日志、ChatGPT / Claude Code 式 AI 编程。
 
 **AI 辅助开发过程：**
 
@@ -50,6 +50,8 @@
 | 平均材料清单 | 3-7 项 |
 | 平均办理流程 | 3-6 步 |
 | 预计节省 | 约 128 分钟（演示估算） |
+| 离线评测 | 32 条问题，Hit@3 100%，引用有效 100%，拒答 100%，Top1 85.7% |
+| 自动化测试 | 26 个全部通过 |
 | 端到端验证 | 桌面 1440px 与手机 390px 均无横向溢出，0 控制台报错 |
 
 > 估算口径：人工整理 30 分钟 / 政策、助手 5 分钟；人工问答 6 分钟、助手 0.5 分钟。测试环境无外网，使用本地 TF-IDF 兜底。实际效果需在社区试点中验证。
@@ -61,6 +63,8 @@
 - 口语问句零命中时，回退当前政策全文，再按意图抽字段。
 - SSE 流式输出，模型不可用时自动降级到本地检索。
 - 结构化抽取：标题 / 列表启发式 + 字段关键词 + 引用映射。
+- 32 条 gold set + 质量门：Hit@3、引用有效/覆盖/支撑、关键词召回、拒答、延迟。
+- 人工审核 + 审计日志；Prometheus + Docker + GitHub Actions 完成工程闭环。
 - 前端：双边框卡片、响应式单列、大字模式、浏览器朗读、打印与 Markdown 导出。
 
 ## 现实边界
