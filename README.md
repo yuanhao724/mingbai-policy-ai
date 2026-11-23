@@ -16,6 +16,14 @@
 
 ![审核台](docs/screenshots/review-desktop.png)
 
+## Demo 与部署
+
+本地 Demo：http://127.0.0.1:8000
+
+部署到 Docker、Render、Railway 或 Linux 云主机的步骤见 [docs/DEPLOY.md](docs/DEPLOY.md)。发布后把这里替换成你的公开 Demo 地址。
+
+仓库建议 topics：`ai`、`llm`、`rag`、`fastapi`、`knowledge-base`、`policy`、`python`、`evaluation`、`human-in-the-loop`、`observability`。
+
 ## 为什么做
 
 - 政策不是没有，是看不懂。关键条件藏在术语、附件和长段落里，老人和新市民最容易卡住。
@@ -319,3 +327,7 @@ python eval/run_eval.py --check
 - [人工审核台](http://127.0.0.1:8000/static/review/index.html)
 
 示例政策仅用于产品演示，具体条件、金额和时限以当地官方最新发布为准。
+
+## License
+
+MIT，详见 [LICENSE](LICENSE)。
