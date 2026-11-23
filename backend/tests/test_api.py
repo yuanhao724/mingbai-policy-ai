@@ -114,8 +114,10 @@ class ApiTest(unittest.TestCase):
         response = self.client.get("/api/eval/latest")
         self.assertEqual(response.status_code, 200)
         report = response.json()
-        self.assertEqual(report["dataset"]["total"], 32)
-        self.assertEqual(report["metrics"]["total"], 32)
+        self.assertEqual(report["dataset"]["total"], 100)
+        self.assertEqual(report["dataset"]["answerable"], 80)
+        self.assertEqual(report["dataset"]["unanswerable"], 20)
+        self.assertEqual(report["metrics"]["total"], 100)
         self.assertEqual(report["metrics"]["hit_at_3"], 1.0)
 
     def test_08_observability(self) -> None:

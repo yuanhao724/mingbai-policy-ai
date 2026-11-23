@@ -24,11 +24,25 @@ _HEADING_PREFIX = re.compile(r"^#{1,6}\s*")
 FIELD_HINTS = {
     "materials": ("材料", "带什么", "准备", "证件", "证明", "毕业证", "复印件", "申请表", "银行卡", "凭证"),
     "contact": ("电话", "咨询", "热线", "窗口", "找谁", "打哪个"),
-    "audience": ("哪些人", "哪些老人", "哪些家庭", "哪些人员", "谁能", "条件", "对象", "资格", "年龄", "户籍"),
+    "audience": (
+        "哪些人",
+        "哪些老人",
+        "哪些家庭",
+        "哪些人员",
+        "谁能",
+        "条件",
+        "对象",
+        "资格",
+        "年龄",
+        "户籍",
+        "外来务工",
+        "高校毕业生",
+    ),
     "pitfalls": ("注意", "坑", "避免", "风险", "不能"),
     "steps": ("流程", "怎么办", "步骤", "办理", "申请"),
-    "deadline": ("多久", "时限", "截止", "时间", "工作日", "有效期"),
-    "benefit": ("多少", "金额", "标准", "比例", "待遇", "报销", "补贴"),
+    "deadline": ("多久", "时限", "截止", "时间", "工作日", "有效期", "发放"),
+    "benefit": ("多少", "金额", "标准", "比例", "待遇", "报销", "补贴", "租金", "结算"),
+    "summary": (),
 }
 
 FIELD_HEADING_HINTS = {
@@ -39,6 +53,7 @@ FIELD_HEADING_HINTS = {
     "steps": ("办理流程", "流程", "步骤", "办理方式", "申请方式"),
     "deadline": ("办理时限", "时限", "截止", "期限", "有效期", "申报时间", "发放时间"),
     "benefit": ("待遇与标准", "待遇", "标准", "补贴标准"),
+    "summary": ("一句话", "摘要", "结论", "速览"),
 }
 
 STOPWORDS = (
@@ -72,6 +87,29 @@ STOPWORDS = (
 REFUSAL = (
     "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；"
     "建议换一个与当前政策相关的问题，或到社区窗口确认。"
+)
+
+OUT_OF_SCOPE_TERMS = (
+    "天气",
+    "电影",
+    "Python",
+    "高铁",
+    "历史",
+    "数学",
+    "旅游",
+    "做饭",
+    "足球",
+    "诗",
+    "公积金",
+    "护照",
+    "失业保险",
+    "创业担保",
+    "人才落户",
+    "车牌",
+    "幼儿园",
+    "挂失",
+    "营业执照",
+    "残疾证",
 )
 
 
@@ -113,20 +151,24 @@ def _grams(text: str) -> set[str]:
 
 
 def _detect_field(question: str) -> str | None:
-    if any(hint in question for hint in ("材料", "带什么", "准备", "证件", "复印件", "申请表")):
+    if any(hint in question for hint in ("主要讲什么", "一句话", "概括", "总结", "讲什么")):
+        return "summary"
+    if any(hint in question for hint in ("材料", "带什么", "准备", "证件", "证明", "复印件", "申请表")):
         return "materials"
     if any(hint in question for hint in ("电话", "咨询", "热线", "窗口", "找谁", "打哪个")):
         return "contact"
-    if any(hint in question for hint in ("哪些人", "哪些老人", "哪些家庭", "哪些人员", "谁能", "条件", "对象", "资格", "年龄", "户籍")):
+    if any(hint in question for hint in ("哪些人", "哪些老人", "哪些家庭", "哪些人员", "谁能", "条件", "对象", "资格", "年龄", "户籍", "外来务工", "高校毕业生")):
         return "audience"
     if any(hint in question for hint in ("注意", "坑", "避免", "风险")):
         return "pitfalls"
-    if "补贴" in question and any(hint in question for hint in ("多久", "领", "期限")):
+    if any(hint in question for hint in ("多少", "金额", "标准", "比例", "待遇", "报销", "租金", "结算")):
         return "benefit"
+    if "补贴" in question and any(hint in question for hint in ("能领", "领多久", "领取期限", "期限", "最长")):
+        return "benefit"
+    if any(hint in question for hint in ("多久", "时限", "截止", "时间", "工作日", "有效期", "发放", "什么时候")):
+        return "deadline"
     if any(hint in question for hint in ("流程", "怎么办", "怎么申请", "步骤", "办理", "申请")):
         return "steps"
-    if any(hint in question for hint in ("多久", "时限", "截止", "时间", "工作日", "有效期")):
-        return "deadline"
     if any(hint in question for hint in ("多少", "金额", "标准", "比例", "待遇", "报销", "补贴")):
         return "benefit"
     return None
@@ -149,6 +191,9 @@ def local_extractive_answer(
             "知识库里暂时没有能支撑这个问题的内容。\n\n"
             "你可以换一种问法，或先在左侧上传相关文档后再试。"
         )
+
+    if any(term in question for term in OUT_OF_SCOPE_TERMS):
+        return REFUSAL
 
     target_field = _detect_field(question)
     if target_field is None:
@@ -179,7 +224,8 @@ def local_extractive_answer(
     if target_field:
         heading_pool = [candidate for candidate in candidates if candidate[4]]
         sentence_pool = [candidate for candidate in candidates if candidate[5]]
-        if len(heading_pool) >= 2:
+        minimum_heading_matches = 1 if target_field == "summary" else 2
+        if len(heading_pool) >= minimum_heading_matches:
             if target_field == "materials":
                 extra = [candidate for candidate in sentence_pool if not candidate[4]][:3]
                 candidates = heading_pool + extra
@@ -214,6 +260,7 @@ def local_extractive_answer(
             "audience": "先看自己是否符合这些条件：",
             "pitfalls": "这几个地方容易踩坑：",
             "contact": "可以这样咨询：",
+            "summary": "一句话概括：",
         }.get(target_field, "用大白话说，这份政策主要看这几点：")
         outro = "如果拿不准，建议拨打 12345 或到社区窗口再确认一次。"
     lines = [intro, ""]

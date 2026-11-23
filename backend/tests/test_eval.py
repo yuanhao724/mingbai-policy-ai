@@ -15,6 +15,7 @@ from eval.metrics import (
     retrieval_metrics,
     summarize,
 )
+from eval.build_gold_set import build as build_gold_set
 
 
 def context(text: str, score: float = 1.0, ordinal: int = 0) -> Retrieved:
@@ -29,6 +30,12 @@ def context(text: str, score: float = 1.0, ordinal: int = 0) -> Retrieved:
 
 
 class MetricsTest(unittest.TestCase):
+    def test_gold_set_has_100_questions(self) -> None:
+        records = build_gold_set()
+        self.assertEqual(len(records), 100)
+        self.assertEqual(sum(1 for item in records if item["answerable"]), 80)
+        self.assertEqual(sum(1 for item in records if not item["answerable"]), 20)
+
     def test_retrieval_metrics(self) -> None:
         hits = [
             context("这是一段与问题无关的内容。", 0.1),

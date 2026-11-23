@@ -387,7 +387,7 @@
         <p class="eyebrow">QUALITY GATE · OFFLINE EVAL</p>
         <h1>质量评测</h1>
         <p class="lede">
-          32 条问题，4 条跨域拒答。可回答 28 条，检查检索命中、引用有效、关键词召回、拒答准确率和本地链路延迟。
+          100 条问题，20 条跨域/近域拒答。可回答 80 条，检查检索命中、引用有效、关键词召回、拒答准确率和本地链路延迟。
         </p>
       </div>
       <div class="eval-note">
@@ -400,9 +400,9 @@
 
     <div id="eval-content" hidden>
       <div class="dataset-strip">
-        <div><strong id="dataset-total">32</strong><span>条评测问题</span></div>
-        <div><strong id="dataset-answerable">28</strong><span>条可回答</span></div>
-        <div><strong id="dataset-unanswerable">4</strong><span>条跨域拒答</span></div>
+        <div><strong id="dataset-total">100</strong><span>条评测问题</span></div>
+        <div><strong id="dataset-answerable">80</strong><span>条可回答</span></div>
+        <div><strong id="dataset-unanswerable">20</strong><span>条跨域/近域拒答</span></div>
         <div><strong id="dataset-mode">local</strong><span>评测模式</span></div>
       </div>
 
@@ -420,7 +420,7 @@
             <li>检索：字符 2-3 gram TF-IDF，按相关片段关键词计算 Hit@1、Hit@3、MRR。</li>
             <li>引用：检查编号是否越界、是否覆盖回答、引用片段是否包含预期关键词。</li>
             <li>Groundedness：回答句子与上下文的字符 bigram 重合率代理指标。</li>
-            <li>拒答：4 条跨域问题，检查是否拒绝根据常识猜测。</li>
+            <li>拒答：20 条跨域/近域问题，检查是否拒绝根据常识猜测。</li>
           </ul>
           <p class="small-note">
             这是离线小样本评测，不等同于真实社区场景的效果验证。正式上线前需要扩大到 200 条以上，并做人工事实核查。

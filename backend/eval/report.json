@@ -1,36 +1,108 @@
 {
-  "generated_at": "2026-11-22T15:21:13+00:00",
+  "generated_at": "2026-11-23T03:49:40+00:00",
   "mode": "local",
   "top_k": 4,
   "dataset": {
-    "total": 32,
-    "answerable": 28,
-    "unanswerable": 4,
+    "total": 100,
+    "answerable": 80,
+    "unanswerable": 20,
     "source": "backend/eval/gold_set.jsonl"
   },
   "metrics": {
-    "total": 32,
-    "answerable": 28,
-    "unanswerable": 4,
-    "hit_at_1": 0.8571,
+    "total": 100,
+    "answerable": 80,
+    "unanswerable": 20,
+    "hit_at_1": 0.825,
     "hit_at_3": 1.0,
-    "mrr": 0.9286,
+    "mrr": 0.9062,
     "keyword_recall": 1.0,
     "citation_validity": 1.0,
     "citation_coverage": 1.0,
-    "citation_support": 1.0,
+    "citation_support": 0.9964,
     "groundedness": 1.0,
     "refusal_accuracy": 1.0,
-    "latency_p50_ms": 0.57,
-    "latency_p95_ms": 1.28
+    "latency_p50_ms": 0.67,
+    "latency_p95_ms": 1.39
   },
   "results": [
     {
-      "question": "申请高龄津贴要带哪些证件？",
+      "question": "申请高龄津贴需要哪些材料？",
       "answer": "这份政策需要带的材料有：\n\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n- 老人本人身份证原件及复印件。 [1]\n- 户口簿首页和本人页复印件。 [1]\n- 老人本人银行卡或社保卡。 [1]\n- 代办人身份证原件及复印件。 [1]\n- 代办委托书，行动不便的老人可以预约社区上门签署。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 6,
-      "latency_ms": 0.96,
+      "latency_ms": 0.93,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_01",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "户口簿",
+        "银行卡",
+        "委托书"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "高龄津贴要带什么证件？",
+      "answer": "这份政策需要带的材料有：\n\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n- 老人本人身份证原件及复印件。 [1]\n- 户口簿首页和本人页复印件。 [1]\n- 老人本人银行卡或社保卡。 [1]\n- 代办人身份证原件及复印件。 [1]\n- 代办委托书，行动不便的老人可以预约社区上门签署。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.69,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_02",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "户口簿",
+        "银行卡",
+        "委托书"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "办理高龄津贴需要准备哪些材料？",
+      "answer": "这份政策需要带的材料有：\n\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n- 老人本人身份证原件及复印件。 [1]\n- 户口簿首页和本人页复印件。 [1]\n- 老人本人银行卡或社保卡。 [1]\n- 代办人身份证原件及复印件。 [1]\n- 代办委托书，行动不便的老人可以预约社区上门签署。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.38,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -49,7 +121,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "elder_materials",
+      "id": "elder_03",
       "doc": "高龄老人津贴申领指南",
       "intent": "materials",
       "expected_keywords": [
@@ -62,11 +134,218 @@
       "top1_miss": false
     },
     {
-      "question": "高龄津贴一般多久能办完？",
-      "answer": "时间安排如下：\n\n- 每月 10 日前提交申请，一般次月开始发放。 [2]\n- 社区受理后 3 个工作日内完成初审。 [2]\n- 街道和民政部门审批合计不超过 10 个工作日。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "高龄津贴的材料清单是什么？",
+      "answer": "这份政策需要带的材料有：\n\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n- 老人本人身份证原件及复印件。 [1]\n- 户口簿首页和本人页复印件。 [1]\n- 老人本人银行卡或社保卡。 [1]\n- 代办人身份证原件及复印件。 [1]\n- 代办委托书，行动不便的老人可以预约社区上门签署。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.38,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_04",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "户口簿",
+        "银行卡",
+        "委托书"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "申请高龄津贴要交哪些证明？",
+      "answer": "这份政策需要带的材料有：\n\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n- 老人本人身份证原件及复印件。 [1]\n- 户口簿首页和本人页复印件。 [1]\n- 老人本人银行卡或社保卡。 [1]\n- 代办人身份证原件及复印件。 [1]\n- 代办委托书，行动不便的老人可以预约社区上门签署。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.4,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_05",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "户口簿",
+        "委托书"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "80 岁老人每月能领多少钱？",
+      "answer": "待遇标准如下：\n\n- 80 至 89 周岁：每人每月 100 元。 [1]\n- 90 至 99 周岁：每人每月 200 元。 [1]\n- 100 周岁及以上：每人每月 500 元。 [1]\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.38,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_06",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "100",
+        "200"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "高龄津贴的发放标准是什么？",
+      "answer": "待遇标准如下：\n\n- 80 至 89 周岁：每人每月 100 元。 [1]\n- 90 至 99 周岁：每人每月 200 元。 [1]\n- 100 周岁及以上：每人每月 500 元。 [1]\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.37,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_07",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "100",
+        "200",
+        "500"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "100 岁老人每月补贴多少？",
+      "answer": "待遇标准如下：\n\n- 80 至 89 周岁：每人每月 100 元。 [1]\n- 90 至 99 周岁：每人每月 200 元。 [1]\n- 100 周岁及以上：每人每月 500 元。 [1]\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.38,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_08",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "500"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "哪些老人可以申请高龄津贴？",
+      "answer": "先看自己是否符合这些条件：\n\n- 具有本地户籍，年满 80 周岁的老年人。 [1]\n- 80 至 89 周岁、90 至 99 周岁、100 周岁及以上，按不同档次发放。 [1]\n- 老人本人无法办理的，可以由子女或监护人代办。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 3,
-      "latency_ms": 0.36,
+      "latency_ms": 0.39,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_09",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "80 周岁",
+        "本地户籍"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "申请高龄津贴需要满足什么条件？",
+      "answer": "先看自己是否符合这些条件：\n\n- 具有本地户籍，年满 80 周岁的老年人。 [1]\n- 80 至 89 周岁、90 至 99 周岁、100 周岁及以上，按不同档次发放。 [1]\n- 老人本人无法办理的，可以由子女或监护人代办。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 3,
+      "latency_ms": 0.38,
       "metrics": {
         "retrieval": {
           "hit_at_1": 0.0,
@@ -85,56 +364,22 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "elder_deadline",
+      "id": "elder_10",
       "doc": "高龄老人津贴申领指南",
-      "intent": "deadline",
+      "intent": "audience",
       "expected_keywords": [
-        "3 个工作日",
-        "10 个工作日"
+        "80 周岁",
+        "本地户籍"
       ],
       "failure_reason": "通过",
       "top1_miss": true
     },
     {
-      "question": "80 岁老人每月能领多少钱？",
-      "answer": "待遇标准如下：\n\n- 80 至 89 周岁：每人每月 100 元。 [1]\n- 90 至 99 周岁：每人每月 200 元。 [1]\n- 100 周岁及以上：每人每月 500 元。 [1]\n- 津贴按月发放到老人本人名下的银行卡。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
-      "answerable": true,
-      "citation_count": 4,
-      "latency_ms": 0.35,
-      "metrics": {
-        "retrieval": {
-          "hit_at_1": 1.0,
-          "hit_at_3": 1.0,
-          "mrr": 1.0,
-          "relevant": [
-            true,
-            false,
-            false
-          ]
-        },
-        "keyword_recall": 1.0,
-        "citation_validity": 1.0,
-        "citation_coverage": 1.0,
-        "citation_support": 1.0,
-        "groundedness": 1.0,
-        "refusal_ok": null
-      },
-      "id": "elder_benefit",
-      "doc": "高龄老人津贴申领指南",
-      "intent": "benefit",
-      "expected_keywords": [
-        "100",
-        "200"
-      ],
-      "failure_reason": "通过",
-      "top1_miss": false
-    },
-    {
-      "question": "哪些老人可以申请高龄津贴？",
+      "question": "高龄津贴只有本地户籍才能领吗？",
       "answer": "先看自己是否符合这些条件：\n\n- 具有本地户籍，年满 80 周岁的老年人。 [1]\n- 80 至 89 周岁、90 至 99 周岁、100 周岁及以上，按不同档次发放。 [1]\n- 老人本人无法办理的，可以由子女或监护人代办。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 3,
-      "latency_ms": 0.36,
+      "latency_ms": 0.4,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -153,11 +398,10 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "elder_audience",
+      "id": "elder_11",
       "doc": "高龄老人津贴申领指南",
       "intent": "audience",
       "expected_keywords": [
-        "80 周岁",
         "本地户籍"
       ],
       "failure_reason": "通过",
@@ -187,7 +431,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "elder_steps",
+      "id": "elder_12",
       "doc": "高龄老人津贴申领指南",
       "intent": "steps",
       "expected_keywords": [
@@ -199,11 +443,181 @@
       "top1_miss": false
     },
     {
-      "question": "领取高龄津贴有哪些容易忽略的注意事项？",
-      "answer": "这几个地方容易踩坑：\n\n- 老人户籍迁出本地或去世后，家属应及时告知社区，避免津贴继续发放。 [2]\n- 同一老人不能在不同地区重复领取高龄津贴。 [2]\n- 银行卡建议使用老人本人名下的一类账户，避免发放失败。 [2]\n- 行动不便、卧床或住院的老人，可以联系社区预约上门服务。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "高龄津贴怎么办理？",
+      "answer": "办理流程可以分成这几步：\n\n- 到户籍所在地社区服务站提出申请，或通过当地政务小程序在线申请。 [2]\n- 社区工作人员核对身份证、户口簿和银行卡信息。 [2]\n- 街道审核后报民政部门审批。 [2]\n- 审批通过后，从符合条件的当月起按月发放。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.37,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_13",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "社区",
+        "审核"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "高龄津贴去哪里申请？",
+      "answer": "办理流程可以分成这几步：\n\n- 到户籍所在地社区服务站提出申请，或通过当地政务小程序在线申请。 [2]\n- 社区工作人员核对身份证、户口簿和银行卡信息。 [2]\n- 街道审核后报民政部门审批。 [2]\n- 审批通过后，从符合条件的当月起按月发放。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 4,
       "latency_ms": 0.36,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_14",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "社区",
+        "街道"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "高龄津贴一般多久能办完？",
+      "answer": "时间安排如下：\n\n- 每月 10 日前提交申请，一般次月开始发放。 [2]\n- 社区受理后 3 个工作日内完成初审。 [2]\n- 街道和民政部门审批合计不超过 10 个工作日。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 3,
+      "latency_ms": 0.37,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_15",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "3 个工作日",
+        "10 个工作日"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "高龄津贴的办理时限是多久？",
+      "answer": "时间安排如下：\n\n- 每月 10 日前提交申请，一般次月开始发放。 [2]\n- 社区受理后 3 个工作日内完成初审。 [2]\n- 街道和民政部门审批合计不超过 10 个工作日。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 3,
+      "latency_ms": 0.43,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_16",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "3 个工作日",
+        "10 个工作日"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "高龄津贴什么时候发放？",
+      "answer": "时间安排如下：\n\n- 每月 10 日前提交申请，一般次月开始发放。 [2]\n- 社区受理后 3 个工作日内完成初审。 [2]\n- 街道和民政部门审批合计不超过 10 个工作日。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 3,
+      "latency_ms": 0.49,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.3333333333333333,
+          "relevant": [
+            false,
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "elder_17",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "次月",
+        "每月 10 日"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "领取高龄津贴有哪些注意事项？",
+      "answer": "这几个地方容易踩坑：\n\n- 老人户籍迁出本地或去世后，家属应及时告知社区，避免津贴继续发放。 [2]\n- 同一老人不能在不同地区重复领取高龄津贴。 [2]\n- 银行卡建议使用老人本人名下的一类账户，避免发放失败。 [2]\n- 行动不便、卧床或住院的老人，可以联系社区预约上门服务。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.35,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -222,7 +636,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "elder_pitfalls",
+      "id": "elder_18",
       "doc": "高龄老人津贴申领指南",
       "intent": "pitfalls",
       "expected_keywords": [
@@ -257,7 +671,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "elder_contact",
+      "id": "elder_19",
       "doc": "高龄老人津贴申领指南",
       "intent": "contact",
       "expected_keywords": [
@@ -268,24 +682,37 @@
       "top1_miss": false
     },
     {
-      "question": "今天天气怎么样？",
-      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
-      "answerable": false,
-      "citation_count": 0,
-      "latency_ms": 0.24,
+      "question": "高龄津贴政策主要讲什么？",
+      "answer": "一句话概括：\n\n- 年满 80 周岁、具有本地户籍的老人，可以申请按月发放的高龄津贴，行动不便可以预约上门办理。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 1,
+      "latency_ms": 0.34,
       "metrics": {
-        "retrieval": null,
-        "keyword_recall": null,
-        "citation_validity": null,
-        "citation_coverage": null,
-        "citation_support": null,
-        "groundedness": null,
-        "refusal_ok": 1.0
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
       },
-      "id": "elder_out_of_scope",
+      "id": "elder_20",
       "doc": "高龄老人津贴申领指南",
-      "intent": "out_of_scope",
-      "expected_keywords": [],
+      "intent": "summary",
+      "expected_keywords": [
+        "80 周岁",
+        "本地户籍",
+        "津贴"
+      ],
       "failure_reason": "通过",
       "top1_miss": false
     },
@@ -294,7 +721,7 @@
       "answer": "这份政策需要带的材料有：\n\n- 公共租赁住房申请表。 [1]\n- 家庭成员身份证和户口簿。 [1]\n- 外来务工人员提供居住证。 [1]\n- 家庭收入证明和财产情况承诺书。 [1]\n- 劳动合同和社保缴纳记录。 [1]\n- 现住房情况证明，例如租赁合同或借住证明。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
       "answerable": true,
       "citation_count": 6,
-      "latency_ms": 0.41,
+      "latency_ms": 0.42,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -313,7 +740,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_materials",
+      "id": "housing_01",
       "doc": "公共租赁住房申请指南",
       "intent": "materials",
       "expected_keywords": [
@@ -326,11 +753,45 @@
       "top1_miss": false
     },
     {
-      "question": "公租房审核一般要多久？",
-      "answer": "时间安排如下：\n\n- 街道受理后 5 个工作日内完成初审。 [2]\n- 联合审核一般不超过 20 个工作日。 [2]\n- 公示期不少于 7 天。 [2]\n- 轮候期一般不超过 3 年，具体以当地公告为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "公租房要带什么证件？",
+      "answer": "这份政策需要带的材料有：\n\n- 公共租赁住房申请表。 [1]\n- 家庭成员身份证和户口簿。 [1]\n- 外来务工人员提供居住证。 [1]\n- 家庭收入证明和财产情况承诺书。 [1]\n- 劳动合同和社保缴纳记录。 [1]\n- 现住房情况证明，例如租赁合同或借住证明。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
       "answerable": true,
-      "citation_count": 4,
-      "latency_ms": 0.4,
+      "citation_count": 6,
+      "latency_ms": 0.44,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_02",
+      "doc": "公共租赁住房申请指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "户口簿",
+        "居住证"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "公租房申请材料有哪些？",
+      "answer": "这份政策需要带的材料有：\n\n- 公共租赁住房申请表。 [1]\n- 家庭成员身份证和户口簿。 [1]\n- 外来务工人员提供居住证。 [1]\n- 家庭收入证明和财产情况承诺书。 [1]\n- 劳动合同和社保缴纳记录。 [1]\n- 现住房情况证明，例如租赁合同或借住证明。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.42,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -338,7 +799,7 @@
           "mrr": 1.0,
           "relevant": [
             true,
-            false,
+            true,
             false
           ]
         },
@@ -349,23 +810,93 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_deadline",
+      "id": "housing_03",
       "doc": "公共租赁住房申请指南",
-      "intent": "deadline",
+      "intent": "materials",
       "expected_keywords": [
-        "5 个工作日",
-        "20 个工作日",
-        "7 天"
+        "申请表",
+        "收入证明",
+        "劳动合同"
       ],
       "failure_reason": "通过",
       "top1_miss": false
+    },
+    {
+      "question": "办理公租房需要哪些证明？",
+      "answer": "这份政策需要带的材料有：\n\n- 公共租赁住房申请表。 [1]\n- 家庭成员身份证和户口簿。 [1]\n- 外来务工人员提供居住证。 [1]\n- 家庭收入证明和财产情况承诺书。 [1]\n- 劳动合同和社保缴纳记录。 [1]\n- 现住房情况证明，例如租赁合同或借住证明。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.43,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_04",
+      "doc": "公共租赁住房申请指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "收入证明",
+        "住房情况"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公租房材料清单是什么？",
+      "answer": "这份政策需要带的材料有：\n\n- 公共租赁住房申请表。 [1]\n- 家庭成员身份证和户口簿。 [1]\n- 外来务工人员提供居住证。 [1]\n- 家庭收入证明和财产情况承诺书。 [1]\n- 劳动合同和社保缴纳记录。 [1]\n- 现住房情况证明，例如租赁合同或借住证明。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.94,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_05",
+      "doc": "公共租赁住房申请指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "申请表",
+        "身份证",
+        "居住证",
+        "劳动合同"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
     },
     {
       "question": "公租房的租金标准是什么？",
       "answer": "待遇标准如下：\n\n- 租金按低于同地段市场租金的标准收取。 [1]\n- 符合条件的家庭可以申请租金减免或租赁补贴。 [1]\n- 户型以中小户型为主，具体房源以每批次配租公告为准。 [1]\n- 租金标准和减免比例按家庭收入、人口和房源类型确定。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 4,
-      "latency_ms": 0.4,
+      "latency_ms": 0.69,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -384,7 +915,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_benefit",
+      "id": "housing_06",
       "doc": "公共租赁住房申请指南",
       "intent": "benefit",
       "expected_keywords": [
@@ -396,11 +927,79 @@
       "top1_miss": false
     },
     {
+      "question": "公租房租金能减免吗？",
+      "answer": "待遇标准如下：\n\n- 租金按低于同地段市场租金的标准收取。 [1]\n- 符合条件的家庭可以申请租金减免或租赁补贴。 [1]\n- 户型以中小户型为主，具体房源以每批次配租公告为准。 [1]\n- 租金标准和减免比例按家庭收入、人口和房源类型确定。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.7,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_07",
+      "doc": "公共租赁住房申请指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "减免",
+        "租金"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公租房有什么补贴？",
+      "answer": "待遇标准如下：\n\n- 租金按低于同地段市场租金的标准收取。 [1]\n- 符合条件的家庭可以申请租金减免或租赁补贴。 [1]\n- 户型以中小户型为主，具体房源以每批次配租公告为准。 [1]\n- 租金标准和减免比例按家庭收入、人口和房源类型确定。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.88,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.3333333333333333,
+          "relevant": [
+            false,
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_08",
+      "doc": "公共租赁住房申请指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "租金减免",
+        "租赁补贴"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
       "question": "哪些人可以申请公租房？",
       "answer": "先看自己是否符合这些条件：\n\n- 城镇中等偏下收入住房困难家庭。 [1]\n- 新就业无房职工，一般要求毕业不超过规定年限。 [1]\n- 在本地稳定就业的外来务工人员。 [1]\n- 家庭在本市无自有住房，或人均住房面积低于规定标准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 4,
-      "latency_ms": 0.54,
+      "latency_ms": 0.79,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -419,7 +1018,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_audience",
+      "id": "housing_09",
       "doc": "公共租赁住房申请指南",
       "intent": "audience",
       "expected_keywords": [
@@ -431,7 +1030,111 @@
       "top1_miss": false
     },
     {
+      "question": "申请公租房需要什么条件？",
+      "answer": "先看自己是否符合这些条件：\n\n- 城镇中等偏下收入住房困难家庭。 [1]\n- 新就业无房职工，一般要求毕业不超过规定年限。 [1]\n- 在本地稳定就业的外来务工人员。 [1]\n- 家庭在本市无自有住房，或人均住房面积低于规定标准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.2,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_10",
+      "doc": "公共租赁住房申请指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "无自有住房",
+        "收入",
+        "住房面积"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "外来务工人员能申请公租房吗？",
+      "answer": "先看自己是否符合这些条件：\n\n- 城镇中等偏下收入住房困难家庭。 [1]\n- 新就业无房职工，一般要求毕业不超过规定年限。 [1]\n- 在本地稳定就业的外来务工人员。 [1]\n- 家庭在本市无自有住房，或人均住房面积低于规定标准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.35,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_11",
+      "doc": "公共租赁住房申请指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "外来务工",
+        "稳定就业"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
       "question": "公租房的申请流程是什么？",
+      "answer": "办理流程可以分成这几步：\n\n- 通过当地住房保障网上平台或街道窗口提交申请。 [2]\n- 街道受理并核对家庭成员、收入和住房情况。 [2]\n- 区住房保障部门会同民政、人社等部门联合审核。 [2]\n- 审核通过后进行公示。 [2]\n- 公示无异议的进入轮候库，按批次摇号或选房。 [2]\n- 选房后签订租赁合同并办理入住。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.67,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_12",
+      "doc": "公共租赁住房申请指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "街道",
+        "公示",
+        "摇号"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公租房怎么申请？",
       "answer": "办理流程可以分成这几步：\n\n- 通过当地住房保障网上平台或街道窗口提交申请。 [2]\n- 街道受理并核对家庭成员、收入和住房情况。 [2]\n- 区住房保障部门会同民政、人社等部门联合审核。 [2]\n- 审核通过后进行公示。 [2]\n- 公示无异议的进入轮候库，按批次摇号或选房。 [2]\n- 选房后签订租赁合同并办理入住。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 6,
@@ -454,23 +1157,22 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_steps",
+      "id": "housing_13",
       "doc": "公共租赁住房申请指南",
       "intent": "steps",
       "expected_keywords": [
-        "街道",
-        "公示",
-        "摇号"
+        "住房保障",
+        "街道"
       ],
       "failure_reason": "通过",
       "top1_miss": false
     },
     {
-      "question": "申请公租房有哪些注意事项？",
-      "answer": "这几个地方容易踩坑：\n\n- 申请家庭必须如实申报收入和住房情况，隐瞒信息会被取消资格。 [3]\n- 公租房只能自住，不得转租、转借或改变用途。 [3]\n- 轮候期间家庭人口、收入、住房发生变化，要及时申报。 [3]\n- 选房后逾期不签约的，可能被视为放弃本次配租资格。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "公租房审核通过后怎么选房？",
+      "answer": "用大白话说，这份政策主要看这几点：\n\n- 通过当地住房保障网上平台或街道窗口提交申请。 [2]\n- 区住房保障部门会同民政、人社等部门联合审核。 [2]\n- 审核通过后进行公示。 [2]\n- 公示无异议的进入轮候库，按批次摇号或选房。 [2]\n- 公租房只能自住，不得转租、转借或改变用途。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
-      "citation_count": 4,
-      "latency_ms": 0.41,
+      "citation_count": 5,
+      "latency_ms": 1.8,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -489,7 +1191,144 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_pitfalls",
+      "id": "housing_14",
+      "doc": "公共租赁住房申请指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "公示",
+        "摇号",
+        "选房"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公租房审核一般要多久？",
+      "answer": "时间安排如下：\n\n- 街道受理后 5 个工作日内完成初审。 [2]\n- 联合审核一般不超过 20 个工作日。 [2]\n- 公示期不少于 7 天。 [2]\n- 轮候期一般不超过 3 年，具体以当地公告为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.13,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_15",
+      "doc": "公共租赁住房申请指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "5 个工作日",
+        "20 个工作日",
+        "7 天"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公租房的办理时限是多久？",
+      "answer": "时间安排如下：\n\n- 街道受理后 5 个工作日内完成初审。 [2]\n- 联合审核一般不超过 20 个工作日。 [2]\n- 公示期不少于 7 天。 [2]\n- 轮候期一般不超过 3 年，具体以当地公告为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.75,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_16",
+      "doc": "公共租赁住房申请指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "5 个工作日",
+        "20 个工作日"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公租房轮候期一般多久？",
+      "answer": "时间安排如下：\n\n- 街道受理后 5 个工作日内完成初审。 [2]\n- 联合审核一般不超过 20 个工作日。 [2]\n- 公示期不少于 7 天。 [2]\n- 轮候期一般不超过 3 年，具体以当地公告为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.21,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_17",
+      "doc": "公共租赁住房申请指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "3 年",
+        "轮候"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "申请公租房有哪些注意事项？",
+      "answer": "这几个地方容易踩坑：\n\n- 申请家庭必须如实申报收入和住房情况，隐瞒信息会被取消资格。 [3]\n- 公租房只能自住，不得转租、转借或改变用途。 [3]\n- 轮候期间家庭人口、收入、住房发生变化，要及时申报。 [3]\n- 选房后逾期不签约的，可能被视为放弃本次配租资格。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.87,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "housing_18",
       "doc": "公共租赁住房申请指南",
       "intent": "pitfalls",
       "expected_keywords": [
@@ -505,7 +1344,7 @@
       "answer": "可以这样咨询：\n\n- 户籍地或就业地街道住房保障窗口。 [3]\n- 当地住房保障服务热线 12345。 [3]\n- 市住房和城乡建设局官网。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 3,
-      "latency_ms": 0.42,
+      "latency_ms": 1.04,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -524,7 +1363,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "housing_contact",
+      "id": "housing_19",
       "doc": "公共租赁住房申请指南",
       "intent": "contact",
       "expected_keywords": [
@@ -535,24 +1374,37 @@
       "top1_miss": false
     },
     {
-      "question": "推荐一部电影？",
-      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
-      "answerable": false,
-      "citation_count": 0,
-      "latency_ms": 0.4,
+      "question": "公租房政策主要讲什么？",
+      "answer": "一句话概括：\n\n- 城镇中等偏下收入住房困难家庭、新就业无房职工和稳定就业的外来务工人员，可以申请公共租赁住房，审核通过后进入轮候或摇号。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 1,
+      "latency_ms": 0.8,
       "metrics": {
-        "retrieval": null,
-        "keyword_recall": null,
-        "citation_validity": null,
-        "citation_coverage": null,
-        "citation_support": null,
-        "groundedness": null,
-        "refusal_ok": 1.0
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
       },
-      "id": "housing_out_of_scope",
+      "id": "housing_20",
       "doc": "公共租赁住房申请指南",
-      "intent": "out_of_scope",
-      "expected_keywords": [],
+      "intent": "summary",
+      "expected_keywords": [
+        "住房困难",
+        "新就业",
+        "轮候"
+      ],
       "failure_reason": "通过",
       "top1_miss": false
     },
@@ -561,7 +1413,7 @@
       "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 医保电子凭证。 [1]\n- 异地长期居住证明，例如居住证、租房合同或子女房产证明。 [2]\n- 转诊人员需要提供医院开具的转诊证明。 [2]\n- 代办时需要代办人身份证和委托书。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
       "answerable": true,
       "citation_count": 6,
-      "latency_ms": 1.1,
+      "latency_ms": 0.76,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -580,7 +1432,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "medical_materials",
+      "id": "medical_01",
       "doc": "城乡居民医保异地就医备案指南",
       "intent": "materials",
       "expected_keywords": [
@@ -593,11 +1445,428 @@
       "top1_miss": false
     },
     {
-      "question": "异地就医备案多久能办好？",
-      "answer": "时间安排如下：\n\n- 线上备案一般 1 到 3 个工作日审核完成。 [2]\n- 长期居住备案在有效期内长期有效。 [2]\n- 临时外出备案有效期一般为 6 个月，具体以参保地为准。 [2]\n- 急诊抢救人员应在就医后 5 个工作日内补办备案。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "异地就医备案要带什么证件？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 医保电子凭证。 [1]\n- 异地长期居住证明，例如居住证、租房合同或子女房产证明。 [2]\n- 转诊人员需要提供医院开具的转诊证明。 [2]\n- 代办时需要代办人身份证和委托书。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.69,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_02",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "社保卡",
+        "医保电子凭证"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "办理异地就医备案需要哪些证明？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 医保电子凭证。 [1]\n- 异地长期居住证明，例如居住证、租房合同或子女房产证明。 [2]\n- 转诊人员需要提供医院开具的转诊证明。 [2]\n- 代办时需要代办人身份证和委托书。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.74,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_03",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "医保电子凭证",
+        "居住证明",
+        "转诊证明"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案材料清单是什么？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 医保电子凭证。 [1]\n- 异地长期居住证明，例如居住证、租房合同或子女房产证明。 [2]\n- 转诊人员需要提供医院开具的转诊证明。 [2]\n- 代办时需要代办人身份证和委托书。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 1.3,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_04",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "医保电子凭证",
+        "居住证明"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案要准备哪些材料？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 医保电子凭证。 [1]\n- 异地长期居住证明，例如居住证、租房合同或子女房产证明。 [2]\n- 转诊人员需要提供医院开具的转诊证明。 [2]\n- 代办时需要代办人身份证和委托书。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 1.41,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_05",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "社保卡",
+        "居住证明",
+        "转诊证明"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "没有备案的话报销比例会怎样？",
+      "answer": "待遇标准如下：\n\n- 备案后在开通直接结算的定点医院就医，可以持医保码直接结算。 [1]\n- 未备案自行外出就医的，报销比例可能降低 10 到 20 个百分点，具体以参保地规定为准。 [1]\n- 急诊抢救人员可以先就医，在规定时间内补办备案。 [1]\n- 门诊和住院的报销范围不同，以就医地和参保地目录为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 4,
-      "latency_ms": 0.7,
+      "latency_ms": 1.5,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_06",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "报销比例",
+        "10 到 20"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案后能直接结算吗？",
+      "answer": "待遇标准如下：\n\n- 备案后在开通直接结算的定点医院就医，可以持医保码直接结算。 [1]\n- 未备案自行外出就医的，报销比例可能降低 10 到 20 个百分点，具体以参保地规定为准。 [1]\n- 急诊抢救人员可以先就医，在规定时间内补办备案。 [1]\n- 门诊和住院的报销范围不同，以就医地和参保地目录为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.84,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_07",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "直接结算",
+        "医保码"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医的报销比例是多少？",
+      "answer": "待遇标准如下：\n\n- 备案后在开通直接结算的定点医院就医，可以持医保码直接结算。 [1]\n- 未备案自行外出就医的，报销比例可能降低 10 到 20 个百分点，具体以参保地规定为准。 [1]\n- 急诊抢救人员可以先就医，在规定时间内补办备案。 [1]\n- 门诊和住院的报销范围不同，以就医地和参保地目录为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.18,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_08",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "报销比例",
+        "10 到 20"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "哪些人需要办理异地就医备案？",
+      "answer": "先看自己是否符合这些条件：\n\n- 异地长期居住人员，包括随子女居住的老人和长期在外务工人员。 [1]\n- 因病情需要转往外地医院治疗的异地转诊人员。 [1]\n- 临时外出期间突发疾病需要就医的人员。 [1]\n- 已经参加城乡居民基本医疗保险，并且参保状态正常。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.29,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_09",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "异地长期居住",
+        "转诊",
+        "临时外出"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案的适用对象有哪些？",
+      "answer": "先看自己是否符合这些条件：\n\n- 异地长期居住人员，包括随子女居住的老人和长期在外务工人员。 [1]\n- 因病情需要转往外地医院治疗的异地转诊人员。 [1]\n- 临时外出期间突发疾病需要就医的人员。 [1]\n- 已经参加城乡居民基本医疗保险，并且参保状态正常。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.39,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_10",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "异地长期居住",
+        "转诊"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "临时外出看病需要备案吗？",
+      "answer": "用大白话说，这份政策主要看这几点：\n\n- 长期在外地居住、需要转外就医或临时外出看病的参保人，先办理异地就医备案，再持医保码就医，符合条件的费用可以直接结算。 [1]\n- 临时外出期间突发疾病需要就医的人员。 [1]\n- 未备案自行外出就医的，报销比例可能降低 10 到 20 个百分点，具体以参保地规定为准。 [1]\n- 选择备案类型：长期居住、异地转诊或临时外出。 [2]\n- 临时外出备案有效期一般为 6 个月，具体以参保地为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
+      "answerable": true,
+      "citation_count": 5,
+      "latency_ms": 1.58,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_11",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "临时外出",
+        "备案"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案怎么办理？",
+      "answer": "办理流程可以分成这几步：\n\n- 打开国家医保服务平台 App 或当地医保小程序。 [2]\n- 进入异地就医备案，选择参保地和就医地。 [2]\n- 选择备案类型：长期居住、异地转诊或临时外出。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n- 提交后等待审核，一般 1 到 3 个工作日完成。 [2]\n- 到定点医院就医时出示医保码，结算时选择异地直接结算。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.87,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_12",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "国家医保服务平台",
+        "备案",
+        "医保码"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案的流程是什么？",
+      "answer": "办理流程可以分成这几步：\n\n- 打开国家医保服务平台 App 或当地医保小程序。 [2]\n- 进入异地就医备案，选择参保地和就医地。 [2]\n- 选择备案类型：长期居住、异地转诊或临时外出。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n- 提交后等待审核，一般 1 到 3 个工作日完成。 [2]\n- 到定点医院就医时出示医保码，结算时选择异地直接结算。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.71,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_13",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "备案",
+        "审核",
+        "医保码"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案在哪里办理？",
+      "answer": "办理流程可以分成这几步：\n\n- 打开国家医保服务平台 App 或当地医保小程序。 [2]\n- 进入异地就医备案，选择参保地和就医地。 [2]\n- 选择备案类型：长期居住、异地转诊或临时外出。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n- 提交后等待审核，一般 1 到 3 个工作日完成。 [2]\n- 到定点医院就医时出示医保码，结算时选择异地直接结算。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 6,
+      "latency_ms": 0.67,
       "metrics": {
         "retrieval": {
           "hit_at_1": 0.0,
@@ -616,7 +1885,41 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "medical_deadline",
+      "id": "medical_14",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "国家医保服务平台",
+        "医保小程序"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "异地就医备案多久能办好？",
+      "answer": "时间安排如下：\n\n- 线上备案一般 1 到 3 个工作日审核完成。 [2]\n- 长期居住备案在有效期内长期有效。 [2]\n- 临时外出备案有效期一般为 6 个月，具体以参保地为准。 [2]\n- 急诊抢救人员应在就医后 5 个工作日内补办备案。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.38,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_15",
       "doc": "城乡居民医保异地就医备案指南",
       "intent": "deadline",
       "expected_keywords": [
@@ -628,11 +1931,45 @@
       "top1_miss": true
     },
     {
-      "question": "没有备案的话报销比例会怎样？",
-      "answer": "待遇标准如下：\n\n- 备案后在开通直接结算的定点医院就医，可以持医保码直接结算。 [1]\n- 未备案自行外出就医的，报销比例可能降低 10 到 20 个百分点，具体以参保地规定为准。 [1]\n- 急诊抢救人员可以先就医，在规定时间内补办备案。 [1]\n- 门诊和住院的报销范围不同，以就医地和参保地目录为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "异地就医备案的办理时限是多久？",
+      "answer": "时间安排如下：\n\n- 线上备案一般 1 到 3 个工作日审核完成。 [2]\n- 长期居住备案在有效期内长期有效。 [2]\n- 临时外出备案有效期一般为 6 个月，具体以参保地为准。 [2]\n- 急诊抢救人员应在就医后 5 个工作日内补办备案。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 4,
-      "latency_ms": 1.13,
+      "latency_ms": 0.68,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_16",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "1 到 3 个工作日",
+        "6 个月"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "异地就医备案有效期多久？",
+      "answer": "时间安排如下：\n\n- 线上备案一般 1 到 3 个工作日审核完成。 [2]\n- 长期居住备案在有效期内长期有效。 [2]\n- 临时外出备案有效期一般为 6 个月，具体以参保地为准。 [2]\n- 急诊抢救人员应在就医后 5 个工作日内补办备案。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.69,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -651,22 +1988,57 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "medical_benefit",
+      "id": "medical_17",
       "doc": "城乡居民医保异地就医备案指南",
-      "intent": "benefit",
+      "intent": "deadline",
       "expected_keywords": [
-        "报销比例",
-        "10 到 20"
+        "6 个月",
+        "长期有效"
       ],
       "failure_reason": "通过",
       "top1_miss": false
     },
     {
-      "question": "哪些人需要办理异地就医备案？",
-      "answer": "先看自己是否符合这些条件：\n\n- 异地长期居住人员，包括随子女居住的老人和长期在外务工人员。 [1]\n- 因病情需要转往外地医院治疗的异地转诊人员。 [1]\n- 临时外出期间突发疾病需要就医的人员。 [1]\n- 已经参加城乡居民基本医疗保险，并且参保状态正常。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "异地就医有哪些注意事项？",
+      "answer": "这几个地方容易踩坑：\n\n- 一定要先备案再就医，急诊情况除外。 [3]\n- 就诊医院需要开通跨省或省内异地直接结算。 [3]\n- 不同统筹区的报销比例不同，不能直接套用其他城市的比例。 [3]\n- 出院结算前发现备案失败，先联系参保地医保经办机构处理。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 4,
-      "latency_ms": 1.3,
+      "latency_ms": 0.71,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "medical_18",
+      "doc": "城乡居民医保异地就医备案指南",
+      "intent": "pitfalls",
+      "expected_keywords": [
+        "先备案",
+        "就诊医院",
+        "统筹区"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "医保备案打哪个电话咨询？",
+      "answer": "可以这样咨询：\n\n- 参保地医保服务热线 12393。 [3]\n- 当地政务服务中心医保窗口。 [3]\n- 国家医保服务平台在线客服。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 3,
+      "latency_ms": 0.66,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -685,22 +2057,21 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "medical_audience",
+      "id": "medical_19",
       "doc": "城乡居民医保异地就医备案指南",
-      "intent": "audience",
+      "intent": "contact",
       "expected_keywords": [
-        "异地长期居住",
-        "转诊",
-        "临时外出"
+        "12393",
+        "医保"
       ],
       "failure_reason": "通过",
       "top1_miss": false
     },
     {
-      "question": "异地就医备案怎么办理？",
-      "answer": "办理流程可以分成这几步：\n\n- 打开国家医保服务平台 App 或当地医保小程序。 [2]\n- 进入异地就医备案，选择参保地和就医地。 [2]\n- 选择备案类型：长期居住、异地转诊或临时外出。 [2]\n- 填写联系方式和居住地址，上传对应证明材料。 [2]\n- 提交后等待审核，一般 1 到 3 个工作日完成。 [2]\n- 到定点医院就医时出示医保码，结算时选择异地直接结算。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "异地就医备案政策主要讲什么？",
+      "answer": "一句话概括：\n\n- 长期在外地居住、需要转外就医或临时外出看病的参保人，先办理异地就医备案，再持医保码就医，符合条件的费用可以直接结算。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
-      "citation_count": 6,
+      "citation_count": 1,
       "latency_ms": 1.2,
       "metrics": {
         "retrieval": {
@@ -720,105 +2091,14 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "medical_steps",
+      "id": "medical_20",
       "doc": "城乡居民医保异地就医备案指南",
-      "intent": "steps",
+      "intent": "summary",
       "expected_keywords": [
-        "国家医保服务平台",
         "备案",
+        "直接结算",
         "医保码"
       ],
-      "failure_reason": "通过",
-      "top1_miss": false
-    },
-    {
-      "question": "异地就医有哪些容易踩的坑？",
-      "answer": "这几个地方容易踩坑：\n\n- 一定要先备案再就医，急诊情况除外。 [3]\n- 就诊医院需要开通跨省或省内异地直接结算。 [3]\n- 不同统筹区的报销比例不同，不能直接套用其他城市的比例。 [3]\n- 出院结算前发现备案失败，先联系参保地医保经办机构处理。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
-      "answerable": true,
-      "citation_count": 4,
-      "latency_ms": 1.07,
-      "metrics": {
-        "retrieval": {
-          "hit_at_1": 0.0,
-          "hit_at_3": 1.0,
-          "mrr": 0.5,
-          "relevant": [
-            false,
-            true,
-            false
-          ]
-        },
-        "keyword_recall": 1.0,
-        "citation_validity": 1.0,
-        "citation_coverage": 1.0,
-        "citation_support": 1.0,
-        "groundedness": 1.0,
-        "refusal_ok": null
-      },
-      "id": "medical_pitfalls",
-      "doc": "城乡居民医保异地就医备案指南",
-      "intent": "pitfalls",
-      "expected_keywords": [
-        "先备案",
-        "就诊医院",
-        "统筹区"
-      ],
-      "failure_reason": "通过",
-      "top1_miss": true
-    },
-    {
-      "question": "医保备案打哪个电话咨询？",
-      "answer": "可以这样咨询：\n\n- 参保地医保服务热线 12393。 [3]\n- 当地政务服务中心医保窗口。 [3]\n- 国家医保服务平台在线客服。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
-      "answerable": true,
-      "citation_count": 3,
-      "latency_ms": 1.12,
-      "metrics": {
-        "retrieval": {
-          "hit_at_1": 1.0,
-          "hit_at_3": 1.0,
-          "mrr": 1.0,
-          "relevant": [
-            true,
-            true,
-            true
-          ]
-        },
-        "keyword_recall": 1.0,
-        "citation_validity": 1.0,
-        "citation_coverage": 1.0,
-        "citation_support": 1.0,
-        "groundedness": 1.0,
-        "refusal_ok": null
-      },
-      "id": "medical_contact",
-      "doc": "城乡居民医保异地就医备案指南",
-      "intent": "contact",
-      "expected_keywords": [
-        "12393",
-        "医保"
-      ],
-      "failure_reason": "通过",
-      "top1_miss": false
-    },
-    {
-      "question": "Python 怎么读文件？",
-      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
-      "answerable": false,
-      "citation_count": 0,
-      "latency_ms": 0.46,
-      "metrics": {
-        "retrieval": null,
-        "keyword_recall": null,
-        "citation_validity": null,
-        "citation_coverage": null,
-        "citation_support": null,
-        "groundedness": null,
-        "refusal_ok": 1.0
-      },
-      "id": "medical_out_of_scope",
-      "doc": "城乡居民医保异地就医备案指南",
-      "intent": "out_of_scope",
-      "expected_keywords": [],
       "failure_reason": "通过",
       "top1_miss": false
     },
@@ -827,7 +2107,7 @@
       "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 就业创业证或就业失业登记证明。 [1]\n- 灵活就业登记记录。 [1]\n- 社会保险缴费凭证。 [1]\n- 本人银行卡。 [1]\n- 高校毕业生需要提供毕业证书。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 3 个片段）",
       "answerable": true,
       "citation_count": 7,
-      "latency_ms": 0.83,
+      "latency_ms": 0.72,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -846,7 +2126,7 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_materials",
+      "id": "flex_01",
       "doc": "灵活就业人员社保补贴申领指南",
       "intent": "materials",
       "expected_keywords": [
@@ -859,11 +2139,11 @@
       "top1_miss": false
     },
     {
-      "question": "灵活就业社保补贴最长能领多久？",
-      "answer": "待遇标准如下：\n\n- 按本人实际缴纳的职工养老和医疗保险费的一定比例给予补贴。 [1]\n- 补贴期限最长不超过 3 年。 [1]\n- 距离法定退休年龄不足 5 年的人员，补贴期限可以延长至退休。 [1]\n- 具体补贴比例和每月上限以当地人社部门公布标准为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "灵活就业社保补贴要带什么证件？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 就业创业证或就业失业登记证明。 [1]\n- 灵活就业登记记录。 [1]\n- 社会保险缴费凭证。 [1]\n- 本人银行卡。 [1]\n- 高校毕业生需要提供毕业证书。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 3 个片段）",
       "answerable": true,
-      "citation_count": 4,
-      "latency_ms": 0.69,
+      "citation_count": 7,
+      "latency_ms": 1.3,
       "metrics": {
         "retrieval": {
           "hit_at_1": 0.0,
@@ -872,31 +2152,67 @@
           "relevant": [
             false,
             true,
-            false
+            true
           ]
         },
         "keyword_recall": 1.0,
         "citation_validity": 1.0,
         "citation_coverage": 1.0,
-        "citation_support": 1.0,
+        "citation_support": 0.8571428571428571,
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_deadline",
+      "id": "flex_02",
       "doc": "灵活就业人员社保补贴申领指南",
-      "intent": "benefit_duration",
+      "intent": "materials",
       "expected_keywords": [
-        "3 年",
-        "退休"
+        "身份证",
+        "社保卡",
+        "就业创业证"
       ],
       "failure_reason": "通过",
       "top1_miss": true
     },
     {
-      "question": "灵活就业社保补贴的标准是什么？",
-      "answer": "待遇标准如下：\n\n- 按本人实际缴纳的职工养老和医疗保险费的一定比例给予补贴。 [1]\n- 补贴期限最长不超过 3 年。 [1]\n- 距离法定退休年龄不足 5 年的人员，补贴期限可以延长至退休。 [1]\n- 具体补贴比例和每月上限以当地人社部门公布标准为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "申请灵活就业补贴需要哪些证明？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [2]\n- 就业创业证或就业失业登记证明。 [2]\n- 灵活就业登记记录。 [2]\n- 社会保险缴费凭证。 [2]\n- 本人银行卡。 [2]\n- 高校毕业生需要提供毕业证书。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 2 个片段）",
       "answerable": true,
-      "citation_count": 4,
+      "citation_count": 7,
+      "latency_ms": 1.25,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 0.8571428571428571,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_03",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "就业创业证",
+        "缴费凭证",
+        "毕业证书"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "灵活就业社保补贴材料清单是什么？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 就业创业证或就业失业登记证明。 [1]\n- 灵活就业登记记录。 [1]\n- 社会保险缴费凭证。 [1]\n- 本人银行卡。 [1]\n- 高校毕业生需要提供毕业证书。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 3 个片段）",
+      "answerable": true,
+      "citation_count": 7,
       "latency_ms": 1.36,
       "metrics": {
         "retrieval": {
@@ -916,22 +2232,23 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_benefit",
+      "id": "flex_04",
       "doc": "灵活就业人员社保补贴申领指南",
-      "intent": "benefit",
+      "intent": "materials",
       "expected_keywords": [
-        "补贴",
-        "比例"
+        "身份证",
+        "就业创业证",
+        "银行卡"
       ],
       "failure_reason": "通过",
       "top1_miss": false
     },
     {
-      "question": "哪些人可以申请灵活就业社保补贴？",
-      "answer": "先看自己是否符合这些条件：\n\n- 经认定的就业困难人员。 [1]\n- 离校两年内未就业的高校毕业生。 [1]\n- 已办理灵活就业登记，并以个人身份缴纳职工养老和医疗保险。 [1]\n- 没有在单位参保，也没有重复享受其他社保补贴。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "灵活就业社保补贴要准备哪些材料？",
+      "answer": "这份政策需要带的材料有：\n\n- 本人身份证或社保卡。 [1]\n- 就业创业证或就业失业登记证明。 [1]\n- 灵活就业登记记录。 [1]\n- 社会保险缴费凭证。 [1]\n- 本人银行卡。 [1]\n- 高校毕业生需要提供毕业证书。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 3 个片段）",
       "answerable": true,
-      "citation_count": 4,
-      "latency_ms": 1.26,
+      "citation_count": 7,
+      "latency_ms": 1.32,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -950,7 +2267,144 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_audience",
+      "id": "flex_05",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "materials",
+      "expected_keywords": [
+        "身份证",
+        "缴费凭证",
+        "银行卡"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "灵活就业社保补贴的标准是什么？",
+      "answer": "待遇标准如下：\n\n- 按本人实际缴纳的职工养老和医疗保险费的一定比例给予补贴。 [1]\n- 补贴期限最长不超过 3 年。 [1]\n- 距离法定退休年龄不足 5 年的人员，补贴期限可以延长至退休。 [1]\n- 具体补贴比例和每月上限以当地人社部门公布标准为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.65,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_06",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "补贴",
+        "比例"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "灵活就业社保补贴能领多久？",
+      "answer": "待遇标准如下：\n\n- 按本人实际缴纳的职工养老和医疗保险费的一定比例给予补贴。 [1]\n- 补贴期限最长不超过 3 年。 [1]\n- 距离法定退休年龄不足 5 年的人员，补贴期限可以延长至退休。 [1]\n- 具体补贴比例和每月上限以当地人社部门公布标准为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.66,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_07",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "3 年",
+        "退休"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "灵活就业社保补贴按什么比例发放？",
+      "answer": "待遇标准如下：\n\n- 按本人实际缴纳的职工养老和医疗保险费的一定比例给予补贴。 [1]\n- 补贴期限最长不超过 3 年。 [1]\n- 距离法定退休年龄不足 5 年的人员，补贴期限可以延长至退休。 [1]\n- 具体补贴比例和每月上限以当地人社部门公布标准为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 0.67,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_08",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "benefit",
+      "expected_keywords": [
+        "比例",
+        "补贴"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "哪些人可以申请灵活就业社保补贴？",
+      "answer": "先看自己是否符合这些条件：\n\n- 经认定的就业困难人员。 [1]\n- 离校两年内未就业的高校毕业生。 [1]\n- 已办理灵活就业登记，并以个人身份缴纳职工养老和医疗保险。 [1]\n- 没有在单位参保，也没有重复享受其他社保补贴。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.34,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_09",
       "doc": "灵活就业人员社保补贴申领指南",
       "intent": "audience",
       "expected_keywords": [
@@ -962,11 +2416,11 @@
       "top1_miss": false
     },
     {
-      "question": "灵活就业社保补贴怎么申请？",
-      "answer": "办理流程可以分成这几步：\n\n- 先到社区或街道办理灵活就业登记。 [2]\n- 按规定缴纳职工养老保险和医疗保险。 [2]\n- 通过当地人社网上服务大厅或街道窗口提交补贴申请。 [2]\n- 街道初审，人社部门复核。 [2]\n- 审核通过后公示，公示无异议的按季度或按月发放。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "灵活就业社保补贴的适用对象有哪些？",
+      "answer": "先看自己是否符合这些条件：\n\n- 经认定的就业困难人员。 [1]\n- 离校两年内未就业的高校毕业生。 [1]\n- 已办理灵活就业登记，并以个人身份缴纳职工养老和医疗保险。 [1]\n- 没有在单位参保，也没有重复享受其他社保补贴。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
-      "citation_count": 5,
-      "latency_ms": 0.95,
+      "citation_count": 4,
+      "latency_ms": 0.78,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -985,7 +2439,75 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_steps",
+      "id": "flex_10",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "就业困难",
+        "高校毕业生"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "高校毕业生能申请灵活就业社保补贴吗？",
+      "answer": "先看自己是否符合这些条件：\n\n- 经认定的就业困难人员。 [1]\n- 离校两年内未就业的高校毕业生。 [1]\n- 已办理灵活就业登记，并以个人身份缴纳职工养老和医疗保险。 [1]\n- 没有在单位参保，也没有重复享受其他社保补贴。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.25,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_11",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "audience",
+      "expected_keywords": [
+        "高校毕业生",
+        "灵活就业"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "灵活就业社保补贴怎么申请？",
+      "answer": "办理流程可以分成这几步：\n\n- 先到社区或街道办理灵活就业登记。 [2]\n- 按规定缴纳职工养老保险和医疗保险。 [2]\n- 通过当地人社网上服务大厅或街道窗口提交补贴申请。 [2]\n- 街道初审，人社部门复核。 [2]\n- 审核通过后公示，公示无异议的按季度或按月发放。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 5,
+      "latency_ms": 0.66,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_12",
       "doc": "灵活就业人员社保补贴申领指南",
       "intent": "steps",
       "expected_keywords": [
@@ -997,11 +2519,11 @@
       "top1_miss": false
     },
     {
-      "question": "申请灵活就业社保补贴要注意什么？",
-      "answer": "这几个地方容易踩坑：\n\n- 社保补贴实行先缴后补，没有缴费记录不能申请。 [2]\n- 同一时间段不能重复享受单位吸纳就业补贴等其他政策。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "灵活就业社保补贴的申请流程是什么？",
+      "answer": "办理流程可以分成这几步：\n\n- 先到社区或街道办理灵活就业登记。 [2]\n- 按规定缴纳职工养老保险和医疗保险。 [2]\n- 通过当地人社网上服务大厅或街道窗口提交补贴申请。 [2]\n- 街道初审，人社部门复核。 [2]\n- 审核通过后公示，公示无异议的按季度或按月发放。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
-      "citation_count": 3,
-      "latency_ms": 1.02,
+      "citation_count": 5,
+      "latency_ms": 0.69,
       "metrics": {
         "retrieval": {
           "hit_at_1": 1.0,
@@ -1020,19 +2542,155 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_pitfalls",
+      "id": "flex_13",
       "doc": "灵活就业人员社保补贴申领指南",
-      "intent": "pitfalls",
+      "intent": "steps",
       "expected_keywords": [
-        "先缴后补",
-        "重复"
+        "灵活就业登记",
+        "街道",
+        "公示"
       ],
       "failure_reason": "通过",
       "top1_miss": false
     },
     {
-      "question": "灵活就业补贴打哪个电话咨询？",
-      "answer": "可以这样咨询：\n\n- 户籍地或常住地街道便民服务中心人社窗口。 [3]\n- 当地人社服务热线 12333。 [3]\n- 当地人社局网上服务大厅。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "question": "灵活就业社保补贴去哪里申请？",
+      "answer": "办理流程可以分成这几步：\n\n- 先到社区或街道办理灵活就业登记。 [2]\n- 按规定缴纳职工养老保险和医疗保险。 [2]\n- 通过当地人社网上服务大厅或街道窗口提交补贴申请。 [2]\n- 街道初审，人社部门复核。 [2]\n- 审核通过后公示，公示无异议的按季度或按月发放。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 5,
+      "latency_ms": 1.03,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_14",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "steps",
+      "expected_keywords": [
+        "人社",
+        "街道"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "灵活就业社保补贴最长能领多久？",
+      "answer": "待遇标准如下：\n\n- 按本人实际缴纳的职工养老和医疗保险费的一定比例给予补贴。 [1]\n- 补贴期限最长不超过 3 年。 [1]\n- 距离法定退休年龄不足 5 年的人员，补贴期限可以延长至退休。 [1]\n- 具体补贴比例和每月上限以当地人社部门公布标准为准。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.34,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.5,
+          "relevant": [
+            false,
+            true,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_15",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "3 年",
+        "退休"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "灵活就业社保补贴多久发放一次？",
+      "answer": "时间安排如下：\n\n- 多数地区按年度集中申报，逾期可能视为放弃。 [2]\n- 街道初审一般 5 个工作日内完成。 [2]\n- 人社部门复核和公示合计不超过 20 个工作日。 [2]\n- 补贴一般按季度发放，具体以当地安排为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.4,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 0.0,
+          "hit_at_3": 1.0,
+          "mrr": 0.3333333333333333,
+          "relevant": [
+            false,
+            false,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_16",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "季度"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": true
+    },
+    {
+      "question": "灵活就业社保补贴的办理时限是多久？",
+      "answer": "时间安排如下：\n\n- 多数地区按年度集中申报，逾期可能视为放弃。 [2]\n- 街道初审一般 5 个工作日内完成。 [2]\n- 人社部门复核和公示合计不超过 20 个工作日。 [2]\n- 补贴一般按季度发放，具体以当地安排为准。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 4,
+      "latency_ms": 1.26,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            false,
+            false
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_17",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "deadline",
+      "expected_keywords": [
+        "5 个工作日",
+        "20 个工作日"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "申请灵活就业社保补贴要注意什么？",
+      "answer": "这几个地方容易踩坑：\n\n- 社保补贴实行先缴后补，没有缴费记录不能申请。 [2]\n- 同一时间段不能重复享受单位吸纳就业补贴等其他政策。 [2]\n- 灵活就业登记信息、银行卡和联系方式变化时要及时更新。 [2]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
       "answerable": true,
       "citation_count": 3,
       "latency_ms": 0.63,
@@ -1054,7 +2712,41 @@
         "groundedness": 1.0,
         "refusal_ok": null
       },
-      "id": "flex_contact",
+      "id": "flex_18",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "pitfalls",
+      "expected_keywords": [
+        "先缴后补",
+        "重复"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "灵活就业补贴打哪个电话咨询？",
+      "answer": "可以这样咨询：\n\n- 户籍地或常住地街道便民服务中心人社窗口。 [3]\n- 当地人社服务热线 12333。 [3]\n- 当地人社局网上服务大厅。 [3]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 3,
+      "latency_ms": 0.62,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_19",
       "doc": "灵活就业人员社保补贴申领指南",
       "intent": "contact",
       "expected_keywords": [
@@ -1065,11 +2757,46 @@
       "top1_miss": false
     },
     {
-      "question": "北京到上海有多远？",
+      "question": "灵活就业社保补贴政策主要讲什么？",
+      "answer": "一句话概括：\n\n- 符合条件的就业困难人员和离校两年内未就业高校毕业生，以灵活就业身份缴纳社保后，可以申请一定期限的社保补贴，先缴后补。 [1]\n\n如果拿不准，建议拨打 12345 或到社区窗口再确认一次。（引用自 1 个片段）",
+      "answerable": true,
+      "citation_count": 1,
+      "latency_ms": 0.94,
+      "metrics": {
+        "retrieval": {
+          "hit_at_1": 1.0,
+          "hit_at_3": 1.0,
+          "mrr": 1.0,
+          "relevant": [
+            true,
+            true,
+            true
+          ]
+        },
+        "keyword_recall": 1.0,
+        "citation_validity": 1.0,
+        "citation_coverage": 1.0,
+        "citation_support": 1.0,
+        "groundedness": 1.0,
+        "refusal_ok": null
+      },
+      "id": "flex_20",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "intent": "summary",
+      "expected_keywords": [
+        "就业困难",
+        "补贴",
+        "先缴后补"
+      ],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "今天天气怎么样？",
       "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
       "answerable": false,
       "citation_count": 0,
-      "latency_ms": 0.61,
+      "latency_ms": 0.01,
       "metrics": {
         "retrieval": null,
         "keyword_recall": null,
@@ -1079,8 +2806,426 @@
         "groundedness": null,
         "refusal_ok": 1.0
       },
-      "id": "flex_out_of_scope",
-      "doc": "灵活就业人员社保补贴申领指南",
+      "id": "oos_01",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "推荐一部电影？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_02",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "Python 怎么读文件？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.0,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_03",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "北京到上海有多远？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.51,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_04",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "中国历史上第一个皇帝是谁？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_05",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "1 加 1 等于几？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.58,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_06",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "去杭州旅游住哪里？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_07",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "番茄炒蛋怎么做？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.23,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_08",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "昨晚足球比赛谁赢了？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_09",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "帮我写一首诗。",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.0,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_10",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公积金贷款额度是多少？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_11",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "公积金怎么提取？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_12",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "护照怎么办理？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_13",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "失业保险怎么领？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_14",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "创业担保贷款怎么申请？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_15",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "人才落户补贴是多少？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_16",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "外地车牌怎么摇号？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_17",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "幼儿园入园需要什么材料？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_18",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "社保卡挂失怎么办？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_19",
+      "doc": "高龄老人津贴申领指南",
+      "intent": "out_of_scope",
+      "expected_keywords": [],
+      "failure_reason": "通过",
+      "top1_miss": false
+    },
+    {
+      "question": "营业执照怎么注销？",
+      "answer": "这份政策里没有找到能回答这个问题的内容。为避免误导，我不会根据常识猜测；建议换一个与当前政策相关的问题，或到社区窗口确认。",
+      "answerable": false,
+      "citation_count": 0,
+      "latency_ms": 0.01,
+      "metrics": {
+        "retrieval": null,
+        "keyword_recall": null,
+        "citation_validity": null,
+        "citation_coverage": null,
+        "citation_support": null,
+        "groundedness": null,
+        "refusal_ok": 1.0
+      },
+      "id": "oos_20",
+      "doc": "高龄老人津贴申领指南",
       "intent": "out_of_scope",
       "expected_keywords": [],
       "failure_reason": "通过",
@@ -1089,27 +3234,87 @@
   ],
   "retrieval_misses": [
     {
-      "id": "elder_deadline",
+      "id": "elder_02",
+      "doc": "高龄老人津贴申领指南",
+      "question": "高龄津贴要带什么证件？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "elder_10",
+      "doc": "高龄老人津贴申领指南",
+      "question": "申请高龄津贴需要满足什么条件？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "elder_15",
       "doc": "高龄老人津贴申领指南",
       "question": "高龄津贴一般多久能办完？",
       "hit_at_3": 1.0
     },
     {
-      "id": "medical_deadline",
+      "id": "elder_17",
+      "doc": "高龄老人津贴申领指南",
+      "question": "高龄津贴什么时候发放？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "housing_02",
+      "doc": "公共租赁住房申请指南",
+      "question": "公租房要带什么证件？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "housing_05",
+      "doc": "公共租赁住房申请指南",
+      "question": "公租房材料清单是什么？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "housing_08",
+      "doc": "公共租赁住房申请指南",
+      "question": "公租房有什么补贴？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "medical_14",
+      "doc": "城乡居民医保异地就医备案指南",
+      "question": "异地就医备案在哪里办理？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "medical_15",
       "doc": "城乡居民医保异地就医备案指南",
       "question": "异地就医备案多久能办好？",
       "hit_at_3": 1.0
     },
     {
-      "id": "medical_pitfalls",
-      "doc": "城乡居民医保异地就医备案指南",
-      "question": "异地就医有哪些容易踩的坑？",
+      "id": "flex_02",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "question": "灵活就业社保补贴要带什么证件？",
       "hit_at_3": 1.0
     },
     {
-      "id": "flex_deadline",
+      "id": "flex_03",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "question": "申请灵活就业补贴需要哪些证明？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "flex_07",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "question": "灵活就业社保补贴能领多久？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "flex_15",
       "doc": "灵活就业人员社保补贴申领指南",
       "question": "灵活就业社保补贴最长能领多久？",
+      "hit_at_3": 1.0
+    },
+    {
+      "id": "flex_16",
+      "doc": "灵活就业人员社保补贴申领指南",
+      "question": "灵活就业社保补贴多久发放一次？",
       "hit_at_3": 1.0
     }
   ],
